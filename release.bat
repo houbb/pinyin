@@ -16,7 +16,7 @@ SET newVersion=0.0.2
 :::: 组织名称
 SET groupName=com.github.houbb
 :::: 项目名称
-SET projectName=segment
+SET projectName=pinyin
 
 :: release 项目版本
 :::: snapshot 版本号
