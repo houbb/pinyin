@@ -9,65 +9,30 @@
 
 ## 创作目的
 
-- 提升转换性能
+想为 java 设计一款优异的拼音工具。
 
-- 压缩词典空间
+[如何为 java 设计一款高性能的拼音转换工具 pinyin4j](https://houbb.github.io/2020/01/09/how-to-design-pinyin4j)
 
-并将这种思想应用到其他类似的框架中。
+## 版本特性
 
-- 并行
+- 返回中文拼音
 
-能否并行转换？？
+# 快速开始
 
-分词之后，直接 fork-join 处理。
+## 准备
 
-- 其他尽可能提升的策略？？
+jdk 1.7+
 
-- 缓存
+## maven 引入
 
-有用吗？
+```xml
+<dependency>
+    <groupId>com.github.houbb</groupId>
+    <artifactId>pinyin</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
 
-分词需要 cache 吗？
+## 使用案例
 
-预取
-
-字符串拼接的最高性能实现方式？？
-
-https://blog.csdn.net/sofeware333/article/details/91433540
-
-- Benchmark
-
-性能对标 TinyPinyin
-
-pinyin4j
-
-## 特性
-
-- 内存与性能的平衡
-
-- 首字母
-
-- 是否启用声调
-
-- 是否启用多音字
-
-- 声调的形式
-
-数字？字母？
-
-- 繁简体
-
-- 拼音转汉字
-
-贪心匹配。
-
-特性对标：
-
-[js 版本](https://github.com/hotoo/pinyin)
-
-[相关资料](https://github.com/overtrue/pinyin-resources)
-
-https://github.com/mozillazg/pinyin-data
-
-https://github.com/mozillazg/phrase-pinyin-data
-
+参考 [PinyinBsTest]()
