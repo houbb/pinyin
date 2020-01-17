@@ -9,12 +9,12 @@ import com.github.houbb.opencc4j.core.impl.ZhConvertBootstrap;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 词典生成辅助类
  * @author binbin.hou
- * @since 1.0.0
+ * @since 0.0.1
  */
 @Ignore
 public class DictTest {

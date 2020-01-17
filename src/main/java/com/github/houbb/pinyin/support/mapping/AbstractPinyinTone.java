@@ -4,7 +4,6 @@ import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.pinyin.spi.IPinyinTone;
-import com.github.houbb.pinyin.util.StringUtils;
 
 import java.util.List;
 
@@ -46,7 +45,7 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
         }
 
         // 直接拆分为单个字，然后用空格分隔
-        List<String> chars = StringUtils.toCharStringList(segment);
+        List<String> chars = StringUtil.toCharStringList(segment);
         List<String> tones = CollectionUtil.toList(chars, new IHandler<String, String>() {
             @Override
             public String handle(String string) {

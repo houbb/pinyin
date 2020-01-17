@@ -9,7 +9,7 @@
 
 ## 创作目的
 
-想为 java 设计一款优异的拼音工具。
+想为 java 设计一款好用的拼音工具。
 
 [如何为 java 设计一款高性能的拼音转换工具 pinyin4j](https://houbb.github.io/2020/01/09/how-to-design-pinyin4j)
 
@@ -35,4 +35,31 @@ jdk 1.7+
 
 ## 使用案例
 
-参考 [PinyinBsTest]()
+参考 [PinyinBsTest](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/bs/PinyinBsTest.java)
+
+### 返回中文的拼音
+
+直接使用 `PinyinHelper.toPinyin(string)` 进行中文转换。
+
+```java
+String pinyin = PinyinHelper.toPinyin("我爱中文");
+Assert.assertEquals("wǒ ài zhōng wén", pinyin);
+```
+
+# 后期 Road-Map
+
+- 支持多音字列表返回
+
+- 支持中文繁简体
+
+- 支持不同的拼音样式
+
+- 拼音转汉字
+
+- 添加对比 pinyin4j 的 benchmark
+
+## 用户自定义相关
+
+- 用户自定义词组拼音
+
+- 用户自定义分词
