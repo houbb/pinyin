@@ -1,6 +1,8 @@
 package com.github.houbb.pinyin.test.bs;
 
 import com.github.houbb.pinyin.bs.PinyinBs;
+import com.github.houbb.pinyin.support.mapping.FirstLetterStylePinyinTone;
+import com.github.houbb.pinyin.support.mapping.NormalStylePinyinTone;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -38,6 +40,34 @@ public class PinyinBsTest {
         List<String> pinyinList = PinyinBs.newInstance().toPinyin(c);
 
         Assert.assertEquals("[zhòng, chóng, tóng]", pinyinList.toString());
+    }
+
+    /**
+     * 普通格式
+     * @since 0.0.3
+     */
+    @Test
+    public void normalStyleTest() {
+        final String text = "我爱中文";
+
+        String pinyin = PinyinBs.newInstance()
+                .pinyinTone(new NormalStylePinyinTone()).toPinyin(text);
+
+        Assert.assertEquals("wo ai zhong wen", pinyin);
+    }
+
+    /**
+     * 首字母格式
+     * @since 0.0.3
+     */
+    @Test
+    public void firstLetterStyleTest() {
+        final String text = "我爱中文";
+
+        String pinyin = PinyinBs.newInstance()
+                .pinyinTone(new FirstLetterStylePinyinTone()).toPinyin(text);
+
+        Assert.assertEquals("w a z w", pinyin);
     }
 
 }

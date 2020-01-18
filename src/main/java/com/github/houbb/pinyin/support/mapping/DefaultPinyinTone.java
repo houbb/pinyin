@@ -7,7 +7,6 @@ import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +46,11 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     private static volatile Map<String, String> phraseMap;
 
     @Override
+    protected List<String> getCharTones(String chinese) {
+        return getCharMap().get(chinese);
+    }
+
+    @Override
     protected String getCharTone(String segment) {
         // 大部分拼音都是单个字，不是多音字。
         // 直接在初始化的时候，设置好。
@@ -55,19 +59,8 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
             return pinyinList.get(0);
         }
 
-        // 返回本身（繁体没有支持的情况下）
-        return segment;
-    }
-
-    @Override
-    protected List<String> getCharTones(String chinese) {
-        List<String> resultList = getCharMap().get(chinese);
-        if(CollectionUtil.isNotEmpty(resultList)) {
-            return resultList;
-        }
-
-        // 不存在则返回本身
-        return Collections.singletonList(chinese);
+        // 没有则返回空
+        return null;
     }
 
     @Override

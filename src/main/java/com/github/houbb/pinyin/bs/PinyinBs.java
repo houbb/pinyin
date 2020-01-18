@@ -66,6 +66,17 @@ public final class PinyinBs implements IPinyin {
         return bs;
     }
 
+    /**
+     * 设置声调的格式化方法
+     * @param pinyinTone 拼音格式化
+     * @return this
+     * @since 0.0.3
+     */
+    public PinyinBs pinyinTone(IPinyinTone pinyinTone) {
+        this.pinyinTone = pinyinTone;
+        return this;
+    }
+
     @Override
     public String toPinyin(String string) {
         if(StringUtil.isEmptyTrim(string)) {

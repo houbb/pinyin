@@ -9,6 +9,7 @@ import com.github.houbb.opencc4j.core.impl.ZhConvertBootstrap;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,6 +51,69 @@ public class DictTest {
 
         final String target = "D:\\code\\github\\pinyin\\src\\main\\resources\\pinyin_dict_char.txt";
         FileUtil.write(target, simpleList);
+    }
+
+    @Test
+    public void showAllToneList() {
+        List<String> lines = FileUtil.readAllLines("D:\\_github\\pinyin\\src\\main\\resources\\pinyin_dict_char.txt");
+
+        List<String> characters = new ArrayList<>();
+
+        for(String string : lines) {
+            String[] strings = string.split(":");
+
+            String tones = strings[1];
+
+            characters.add(tones.replaceAll("[a-z,]", ""));
+        }
+
+        characters = CollectionUtil.distinctAndSort(characters);
+
+        for(String c : characters) {
+            System.out.println(c);
+        }
+    }
+
+    @Test
+    public void commonToneSortTest() {
+        List<String> commonList = FileUtil.readAllLines("D:\\_github\\pinyin\\src\\test\\resources\\common_tone_num.txt");
+
+        System.out.println(CollectionUtil.sort(commonList));
+    }
+
+    @Test
+    public void filterSpecialTest() {
+        List<String> allToneList = FileUtil.readAllLines("D:\\_github\\pinyin\\src\\test\\resources\\tone\\all.txt");
+        List<String> knowToneList = FileUtil.readAllLines("D:\\_github\\pinyin\\src\\test\\resources\\tone\\all.txt");
+
+        List<String> resultList = new ArrayList<>();
+
+        for(String all : allToneList) {
+            String result = all;
+
+            for(String know : knowToneList) {
+                // 移除
+                result = result.replaceAll(know, "");
+            }
+
+            if(StringUtil.isNotEmpty(result)) {
+                resultList.add(result);
+            }
+        }
+
+        resultList = CollectionUtil.distinctAndSort(resultList);
+        FileUtil.write("D:\\_github\\pinyin\\src\\test\\resources\\tone\\sepcial.txt",
+                resultList);
+
+    }
+
+    @Test
+    public void toneListTest() {
+        List<String> commonList = FileUtil.readAllLines("D:\\_github\\pinyin\\src\\test\\resources\\common_tone_num.txt");
+
+        commonList = CollectionUtil.distinctAndSort(commonList);
+
+        FileUtil.write("D:\\_github\\pinyin\\src\\main\\resources\\pinyin_dict_tone.txt", commonList);
     }
 
 }

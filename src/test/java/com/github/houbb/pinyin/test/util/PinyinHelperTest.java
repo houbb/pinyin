@@ -1,6 +1,5 @@
 package com.github.houbb.pinyin.test.util;
 
-import com.github.houbb.pinyin.bs.PinyinBs;
 import com.github.houbb.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
