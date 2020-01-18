@@ -39,12 +39,9 @@ public class BenchmarkTest {
      * pinyin4j: Pinyin4j cost: 33002 ms
      *
      * Pinyin4j 没有中文分词
-     *
-     * 预热耗时：33 ms
      */
     @Test
     public void pinyin4jNoSegmentTest() throws BadHanyuPinyinOutputFormatCombination {
-        long prepareStartTime = System.currentTimeMillis();
         // 创建汉语拼音处理类
         HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
         // 输出设置，大小写，音标方式
@@ -54,7 +51,6 @@ public class BenchmarkTest {
         // zhong qing huo guo
         String result = PinyinHelper.toHanyuPinyinString("重庆火锅", defaultFormat, " ");
         System.out.println(result);
-        System.out.println("Pinyin4j prepare cost: " + (System.currentTimeMillis()-prepareStartTime));
 
         // 验证
         final String text = getText();
@@ -74,12 +70,9 @@ public class BenchmarkTest {
      */
     @Test
     public void pinyinWithSegmentTest() {
-        long prepareStartTime = System.currentTimeMillis();
-
         // 预热
         String result = com.github.houbb.pinyin.util.PinyinHelper.toPinyin("重庆火锅");
         System.out.println(result);
-        System.out.println("Pinyin prepare cost: " + (System.currentTimeMillis()-prepareStartTime));
 
         // 验证
         final String text = getText();

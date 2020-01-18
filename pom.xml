@@ -6,7 +6,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
 
     <properties>
         <!--============================== All PLUGINS START ==============================-->
@@ -64,6 +64,7 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.0</version>
             <optional>true</optional>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

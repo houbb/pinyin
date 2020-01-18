@@ -15,11 +15,11 @@
 
 ## 特性
 
-- 速度是 pinyin4j 的两倍
+- [性能是 pinyin4j 的两倍](#benchmark)
 
 - 极简的 api 设计
 
-- 支持处理字符串
+- 支持转换长文本
 
 - 支持多音字
 
@@ -138,18 +138,35 @@ Assert.assertEquals("w a z w", pinyin);
 
 - 拼音转汉字
 
-- 添加对比 pinyin4j 的 benchmark
-
 ## 用户自定义相关
 
-- 用户自定义词组拼音
+- 用户自定义词组
 
 - 用户自定义分词
 
-# Benchmark 性能对比
+# benchmark
 
-## 
+测试代码见 [BenchmarkTest.java](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/benchmark/BenchmarkTest.java)
 
+性能对比时使用相同的机器，相同测试文本，验证相同的次数。
+
+均提前做好预热处理，可供参考。
+
+## 单个分词
+
+| 对比函数 | 对比次数 | 对比内容 | 耗时 | 备注 |
+|:---|:---|:---|:---|:---|
+| `Pinyin4j toHanyuPinyinStringArray()` | 100w 次 | 相同文本随机选择一个字符 | 621 ms | |
+| `pinyin toPinyin()` | 100w 次 | 相同文本随机选择一个字符 | 317 ms | |
+
+## 字符串分词
+
+| 对比函数 | 对比次数 | 对比内容 | 耗时 | 备注 |
+|:---|:---|:---|:---|:---|
+| `Pinyin4j toHanyuPinyinString()` | 1w 次 | 相同长文本 | 33002 ms | |
+| `pinyin toPinyin()` | 1w 次 | 相同长文本 | 17975 ms | |
+
+而且 Pinyin4j 的汉语字符串转换是不支持分词的，本项目在支持分词的情况下速度基本依然是 pinyin4j 的两倍。
 
 # 技术鸣谢
 
