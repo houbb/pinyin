@@ -155,17 +155,17 @@ Assert.assertEquals("w a z w", pinyin);
 
 ## 单个分词
 
-| 对比函数 | 对比次数 | 对比内容 | 耗时 | 备注 |
-|:---|:---|:---|:---|:---|
-| `Pinyin4j toHanyuPinyinStringArray()` | 100w 次 | 相同文本随机选择一个字符 | 621 ms | |
-| `pinyin toPinyin()` | 100w 次 | 相同文本随机选择一个字符 | 317 ms | |
+| 对比函数 | 对比次数 | 对比内容 | 耗时 |
+|:---|:---|:---|:---|
+| `Pinyin4j toHanyuPinyinStringArray()` | 100w 次 | 相同文本随机选择一个字符 | 621 ms |
+| `pinyin toPinyin()` | 100w 次 | 相同文本随机选择一个字符 | 317 ms |
 
 ## 字符串分词
 
-| 对比函数 | 对比次数 | 对比内容 | 耗时 | 备注 |
-|:---|:---|:---|:---|:---|
-| `Pinyin4j toHanyuPinyinString()` | 1w 次 | 相同长文本 | 33002 ms | |
-| `pinyin toPinyin()` | 1w 次 | 相同长文本 | 17975 ms | |
+| 对比函数 | 对比次数 | 对比内容 | 耗时 |
+|:---|:---|:---|:---|
+| `Pinyin4j toHanyuPinyinString()` | 1w 次 | 相同长文本 | 33002 ms |
+| `pinyin toPinyin()` | 1w 次 | 相同长文本 | 17975 ms |
 
 而且 Pinyin4j 的汉语字符串转换是不支持分词的，本项目在支持分词的情况下速度基本依然是 pinyin4j 的两倍。
 
