@@ -9,19 +9,23 @@
 
 ## 创作目的
 
-想为 java 设计一款好用的拼音工具。
+想为 java 设计一款便捷易用的拼音工具。
 
 [如何为 java 设计一款高性能的拼音转换工具 pinyin4j](https://houbb.github.io/2020/01/09/how-to-design-pinyin4j)
 
 ## 特性
 
+- 速度是 pinyin4j 的两倍
+
 - 极简的 api 设计
 
-- 支持中文拼音转换
+- 支持处理字符串
 
 - 支持多音字
 
 - 支持多种拼音标注方式
+
+- 支持中文分词
 
 # 快速开始
 
@@ -35,7 +39,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
@@ -59,6 +63,18 @@ Assert.assertEquals("wǒ ài zhōng wén", pinyin);
 ```java
 List<String> pinyinList = PinyinHelper.toPinyin('重');
 Assert.assertEquals("[zhòng, chóng, tóng]", pinyinList.toString());
+```
+
+### 分词特性
+
+默认支持中文分词，对用户透明。
+
+```java
+String pinyin = PinyinHelper.toPinyin("重庆火锅");
+Assert.assertEquals("chóng qìng huǒ guō", pinyin);
+
+String pinyin2 = PinyinHelper.toPinyin("分词也很重要");
+Assert.assertEquals("fēn cí yě hěn zhòng yào", pinyin2);
 ```
 
 # 指定拼音标注形式
@@ -116,10 +132,6 @@ Assert.assertEquals("w a z w", pinyin);
 
 # 后期 Road-Map
 
-- 添加中文分词
-
-默认开启
-
 - 支持中文繁简体
 
 默认关闭该功能
@@ -134,11 +146,15 @@ Assert.assertEquals("w a z w", pinyin);
 
 - 用户自定义分词
 
-# 技术鸣谢
+# Benchmark 性能对比
 
-## 拼音字典
+## 
+
+
+# 技术鸣谢
 
 [pinyin-data](https://github.com/mozillazg/pinyin-data) 与 [phrase-pinyin-data](https://github.com/mozillazg/phrase-pinyin-data)
 
 提供的拼音字典消息。
 
+[segment](https://github.com/houbb/segment) 提供的中文分词。

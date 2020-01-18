@@ -14,6 +14,7 @@ import com.github.houbb.pinyin.support.appender.StringBuilderPinyinAppender;
 import com.github.houbb.pinyin.support.chinese.SimplePinyinChinese;
 import com.github.houbb.pinyin.support.mapping.DefaultPinyinTone;
 import com.github.houbb.pinyin.support.segment.CharPinyinSegment;
+import com.github.houbb.pinyin.support.segment.DefaultPinyinSegment;
 import com.github.houbb.pinyin.support.segment.SinglePinyinSegment;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public final class PinyinBs implements IPinyin {
      * 默认分词
      * @since 0.0.1
      */
-    private IPinyinSegment pinyinSegment = Instances.singleton(CharPinyinSegment.class);
+    private IPinyinSegment pinyinSegment = Instances.singleton(DefaultPinyinSegment.class);
 
     /**
      * 中文服务类
