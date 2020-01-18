@@ -95,6 +95,7 @@ public static String toPinyin(final String string, final PinyinStyleEnum styleEn
 ### PinyinStyleEnum 样式枚举
 
 | 枚举 | 说明 | 例子 |
+|:---|:---|:---|
 | `DEFAULT` | 默认模式，拼音声调在韵母第一个字母上。| pīn yīn |
 | `NORMAL` | 普通模式，即不带声调。| pin yin |
 | `NUM_LAST` | 数字标注模式，即拼音声调以数字形式在各个拼音之后，用数字 1-5 进行表示。| pin1 yin1 |
