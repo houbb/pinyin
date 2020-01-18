@@ -171,8 +171,6 @@ Assert.assertEquals("w a z w", pinyin);
 
 # 技术鸣谢
 
-[pinyin-data](https://github.com/mozillazg/pinyin-data) 与 [phrase-pinyin-data](https://github.com/mozillazg/phrase-pinyin-data)
-
-提供的拼音字典消息。
+[pinyin-data](https://github.com/mozillazg/pinyin-data) 与 [phrase-pinyin-data](https://github.com/mozillazg/phrase-pinyin-data) 提供的拼音字典消息。
 
 [segment](https://github.com/houbb/segment) 提供的中文分词。
