@@ -2,7 +2,9 @@ package com.github.houbb.pinyin.bs;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.instance.impl.Instances;
+import com.github.houbb.heaven.util.lang.CharUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
+import com.github.houbb.heaven.util.util.CharsetUtil;
 import com.github.houbb.pinyin.api.IPinyin;
 import com.github.houbb.pinyin.spi.IPinyinAppender;
 import com.github.houbb.pinyin.spi.IPinyinChinese;
@@ -15,6 +17,8 @@ import com.github.houbb.pinyin.support.segment.CharPinyinSegment;
 import com.github.houbb.pinyin.support.segment.SinglePinyinSegment;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -105,6 +109,16 @@ public final class PinyinBs implements IPinyin {
         pinyinAppender.clear();
 
         return result;
+    }
+
+    @Override
+    public List<String> toPinyin(char chinese) {
+        String string = String.valueOf(chinese);
+        if(CharsetUtil.isChinese(chinese)) {
+            return pinyinTone.toneList(string);
+        }
+
+        return Collections.singletonList(string);
     }
 
     /**

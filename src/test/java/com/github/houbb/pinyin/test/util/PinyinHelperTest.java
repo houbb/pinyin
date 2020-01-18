@@ -1,8 +1,11 @@
 package com.github.houbb.pinyin.test.util;
 
+import com.github.houbb.pinyin.bs.PinyinBs;
 import com.github.houbb.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * @author binbin.hou
@@ -39,6 +42,16 @@ public class PinyinHelperTest {
     public void toPinyinEmptyTest() {
         Assert.assertNull(PinyinHelper.toPinyin(null));
         Assert.assertEquals("", PinyinHelper.toPinyin(""));
+    }
+
+    /**
+     * 返回多音字列表测试
+     * @since 0.0.2
+     */
+    @Test
+    public void toPinyinListTest() {
+        List<String> pinyinList = PinyinHelper.toPinyin('重');
+        Assert.assertEquals("[zhòng, chóng, tóng]", pinyinList.toString());
     }
 
 }

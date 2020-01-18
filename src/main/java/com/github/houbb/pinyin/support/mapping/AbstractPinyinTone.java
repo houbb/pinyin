@@ -3,6 +3,7 @@ package com.github.houbb.pinyin.support.mapping;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.github.houbb.pinyin.exception.PinyinException;
 import com.github.houbb.pinyin.spi.IPinyinTone;
 
 import java.util.List;
@@ -22,6 +23,14 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * @since 0.0.1
      */
     protected abstract String getCharTone(final String segment);
+
+    /**
+     * 获取单个字符的所有拼音列表
+     * @param chinese 中文字符
+     * @return 结果列表
+     * @since 0.0.2
+     */
+    protected abstract List<String> getCharTones(final String chinese);
 
     /**
      * 获取词组的映射
@@ -54,6 +63,11 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
         });
 
         return StringUtil.join(tones, StringUtil.BLANK);
+    }
+
+    @Override
+    public List<String> toneList(String chinese) {
+        return getCharTones(chinese);
     }
 
 }

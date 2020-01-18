@@ -1,5 +1,7 @@
 package com.github.houbb.pinyin.api;
 
+import java.util.List;
+
 /**
  * 拼音核心用户 api
  * @author binbin.hou
@@ -14,5 +16,15 @@ public interface IPinyin {
      * @since 0.0.1
      */
     String toPinyin(final String string);
+
+    /**
+     * 返回所有拼音列表
+     * （1）返回当前汉字的所有拼音列表
+     * （2）如果不是汉字，返回其本身
+     * @param chinese 中文汉字
+     * @return 返回所有拼音列表
+     * @since 0.0.2
+     */
+    List<String> toPinyin(final char chinese);
 
 }
