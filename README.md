@@ -46,7 +46,7 @@ jdk 1.7+
 
 ## 快速开始
 
-参考 [PinyinBsTest](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/bs/PinyinBsTest.java)
+参考 [PinyinHelperTest](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/util/PinyinHelperTest.java)
 
 ### 返回中文的拼音
 
