@@ -2,6 +2,7 @@
 
 [pinyin](https://github.com/houbb/pinyin) 是 java 实现的高性能中文拼音转换工具。
 
+[![Build Status](https://travis-ci.com/houbb/segment.svg?branch=master)](https://travis-ci.com/houbb/pinyin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/pinyin/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/pinyin)
 [![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/pinyin/blob/master/LICENSE.txt)
 
