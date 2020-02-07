@@ -140,7 +140,7 @@ Assert.assertEquals("w a z w", pinyin);
 
 本框架支持繁体中文获取对应拼音。
 
-当然你也可以使用 [opencc4j](https://github.com/houbb/opencc4j) 统一转换为简体再做拼音获取以提高准确率。
+当然你也可以使用 [opencc4j](https://github.com/houbb/opencc4j) 统一转换为简体再做拼音获取，从而提高准确率。
 
 ```java
 String pinyin = PinyinHelper.toPinyin("奮斗");
