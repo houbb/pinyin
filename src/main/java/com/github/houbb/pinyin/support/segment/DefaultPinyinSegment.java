@@ -1,13 +1,11 @@
 package com.github.houbb.pinyin.support.segment;
 
 import com.github.houbb.heaven.annotation.ThreadSafe;
-import com.github.houbb.heaven.support.handler.IHandler;
-import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
+import com.github.houbb.nlp.common.segment.ICommonSegment;
+import com.github.houbb.nlp.common.segment.impl.CommonSegments;
 import com.github.houbb.pinyin.spi.IPinyinSegment;
-import com.github.houbb.segment.bs.SegmentBs;
-import com.github.houbb.segment.support.data.impl.SegmentDatas;
+import com.github.houbb.pinyin.support.segment.trie.DefaultPinyinTrieTreeMap;
 
-import javax.swing.text.Segment;
 import java.util.List;
 
 /**
@@ -21,17 +19,14 @@ import java.util.List;
 public class DefaultPinyinSegment implements IPinyinSegment {
 
     /**
-     * 分词的实现保持不变
-     *
-     * （1）此处基于用户自定义的字典。
-     * @since 0.0.4
+     * 默认分词实现
+     * @since 0.0.5
      */
-    private static final SegmentBs SEGMENT_BS = SegmentBs.newInstance()
-            .segmentData(SegmentDatas.define());
+    private static final ICommonSegment COMMON_SEGMENT = CommonSegments.fastForward(new DefaultPinyinTrieTreeMap());
 
     @Override
     public List<String> segment(String string) {
-        return SEGMENT_BS.segmentWords(string);
+        return COMMON_SEGMENT.segment(string);
     }
 
 }

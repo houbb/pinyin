@@ -9,16 +9,13 @@ import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 正常的拼音注音形式
  *
  * （1）单个字的词库与词组的词库分离
  * （2）二者词库都是懒加载，只有使用的时候才会去初始化。
- *
- * NumberXXX
- *
- * NormalXXX
  *
  * @author binbin.hou
  * @since 0.0.1
@@ -117,6 +114,12 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         }
 
         return phraseMap;
+    }
+
+    @Override
+    public Set<String> phraseSet() {
+        Map<String, String> map = getPhraseMap();
+        return map.keySet();
     }
 
 }

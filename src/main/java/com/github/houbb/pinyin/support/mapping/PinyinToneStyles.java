@@ -37,6 +37,15 @@ public final class PinyinToneStyles {
         }
 
         // 返回默认
+        return defaults();
+    }
+
+    /**
+     * 返回默认实现
+     * @return 默认实现
+     * @since 0.0.5
+     */
+    public static IPinyinTone defaults() {
         return Instances.singleton(DefaultPinyinTone.class);
     }
 

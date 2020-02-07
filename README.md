@@ -42,7 +42,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 </dependency>
 ```
 

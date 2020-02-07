@@ -1,6 +1,7 @@
 package com.github.houbb.pinyin.spi;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 拼音连接接口
@@ -25,5 +26,14 @@ public interface IPinyinTone {
      * @return 结果
      */
     List<String> toneList(final String chinese);
+
+    /**
+     * 词组列表
+     *
+     * 作用：快速分词。
+     * @return 列表
+     * @since 0.0.5
+     */
+    Set<String> phraseSet();
 
 }
