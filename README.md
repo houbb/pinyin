@@ -2,6 +2,7 @@
 
 [pinyin](https://github.com/houbb/pinyin) 是 java 实现的高性能中文拼音转换工具。
 
+[![Build Status](https://travis-ci.com/houbb/segment.svg?branch=master)](https://travis-ci.com/houbb/pinyin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/pinyin/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/pinyin)
 [![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/pinyin/blob/master/LICENSE.txt)
 
@@ -47,7 +48,7 @@ jdk 1.7+
 
 ## 快速开始
 
-参考 [PinyinBsTest](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/bs/PinyinBsTest.java)
+参考 [PinyinHelperTest](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/util/PinyinHelperTest.java)
 
 ### 返回中文的拼音
 
