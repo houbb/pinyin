@@ -1,7 +1,10 @@
 package com.github.houbb.pinyin.support.chinese;
 
 import com.github.houbb.heaven.annotation.ThreadSafe;
+import com.github.houbb.heaven.util.lang.CharUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CharsetUtil;
+import com.github.houbb.nlp.common.format.impl.CharFormats;
 import com.github.houbb.pinyin.spi.IPinyinChinese;
 
 /**
@@ -23,9 +26,26 @@ public class SimplePinyinChinese implements IPinyinChinese {
 
     @Override
     public String toSimple(String segment) {
-        // TODO: 后期替换为 opencc4j
-        // 这里为了简单，直接处理分词后的结果即可。
-        return segment;
+        if(StringUtil.isEmptyTrim(segment)) {
+            return segment;
+        }
+
+        char[] chars = segment.toCharArray();
+
+        StringBuilder buffer = new StringBuilder(segment.length());
+        for(char c : chars) {
+            if(CharsetUtil.isChinese(c)) {
+                char simpleChar = CharFormats.chineseSimple().format(c);
+                buffer.append(simpleChar);
+            } else {
+                // 直接添加，避免出现非中文的情况。
+                // 暂时这么处理，后期就可以避免修改。
+                buffer.append(c);
+            }
+        }
+
+        // 当然也可以直接使用 opencc4j，后期优化后统一调整。
+        return buffer.toString();
     }
 
 }

@@ -27,6 +27,8 @@
 
 - 支持中文分词
 
+- 支持中文繁简体
+
 # 快速开始
 
 ## 准备
@@ -39,7 +41,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
@@ -131,11 +133,22 @@ String pinyin = PinyinHelper.toPinyin("我爱中文", PinyinStyleEnum.FIRST_LETT
 Assert.assertEquals("w a z w", pinyin);
 ```
 
+# 更多特性
+
+## 支持繁体中文
+
+本框架支持繁体中文获取对应拼音。
+
+当然你也可以使用 [opencc4j](https://github.com/houbb/opencc4j) 统一转换为简体再做拼音获取以提高准确率。
+
+```java
+String pinyin = PinyinHelper.toPinyin("奮斗");
+Assert.assertEquals("fèn dòu", pinyin);
+```
+
 # 后期 Road-Map
 
-- 支持中文繁简体
-
-默认关闭该功能
+- 支持同音字列表
 
 - 拼音转汉字
 

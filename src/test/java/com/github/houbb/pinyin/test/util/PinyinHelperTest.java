@@ -13,7 +13,7 @@ import java.util.List;
 public class PinyinHelperTest {
 
     /**
-     * 转换为中文测试
+     * 转换中文测试
      * @since 0.0.1
      */
     @Test
@@ -24,7 +24,7 @@ public class PinyinHelperTest {
 
 
     /**
-     * 转换为中文测试
+     * 转换英文测试
      * @since 0.0.1
      */
     @Test
@@ -51,6 +51,16 @@ public class PinyinHelperTest {
     public void toPinyinListTest() {
         List<String> pinyinList = PinyinHelper.toPinyin('重');
         Assert.assertEquals("[zhòng, chóng, tóng]", pinyinList.toString());
+    }
+
+    /**
+     * 转换中文繁体测试
+     * @since 0.0.5
+     */
+    @Test
+    public void toPinyinChineseSimpleTest() {
+        String pinyin = PinyinHelper.toPinyin("奮斗");
+        Assert.assertEquals("fèn dòu", pinyin);
     }
 
 }
