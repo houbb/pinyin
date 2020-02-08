@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.com/houbb/segment.svg?branch=master)](https://travis-ci.com/houbb/pinyin)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/pinyin/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/pinyin)
 [![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/pinyin/blob/master/LICENSE.txt)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/houbb/nlp-common)
 
 > [变更日志](https://github.com/houbb/pinyin/blob/master/CHANGELOG.md)
 
@@ -30,6 +31,8 @@
 
 - 支持中文繁简体
 
+- 支持自定义拼音词库
+
 # 快速开始
 
 ## 准备
@@ -42,7 +45,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 </dependency>
 ```
 
@@ -147,17 +150,60 @@ String pinyin = PinyinHelper.toPinyin("奮斗");
 Assert.assertEquals("fèn dòu", pinyin);
 ```
 
+# 自定义拼音词库
+
+已有的词库很难满足各种各样的场景，本工具提供自定义拼音词库的功能。
+
+## 自定义单个字的拼音
+
+### 自定义字典
+
+自定义 `resources/pinyin_dict_char_define.txt` 文件内容，格式如下：
+
+```
+莪:wǒ
+噯:ài,āi,ǎi
+```
+
+汉字与拼音使用英文`:` 分割，多音字使用英文`,`做拼音的分割。
+
+### 测试
+
+```java
+String pinyin = PinyinHelper.toPinyin("莪");
+Assert.assertEquals("wǒ", pinyin);
+```
+
+## 自定义词组的拼音
+
+### 自定义字典
+
+自定义 `resources/pinyin_dict_phrase_define.txt` 文件内容，格式如下：
+
+```
+褈慶炎鍋:chóng qìng huǒ guō
+```
+
+### 测试
+
+以一串火星文为例。
+
+```java
+String pinyin = PinyinHelper.toPinyin("莪噯褈慶炎鍋");
+Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
+```
+
+## 注意点
+
+1. 仅支持汉语的自定义拼音。
+
+2. 为了保持功能的一致性，如果你自定义的是繁体字（词），对应的简体也会变成自定义注音。 
+
 # 后期 Road-Map
 
 - 支持同音字列表
 
 - 拼音转汉字
-
-## 用户自定义相关
-
-- 用户自定义词组
-
-- 用户自定义分词
 
 # benchmark
 

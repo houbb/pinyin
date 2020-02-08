@@ -3,23 +3,19 @@ package com.github.houbb.pinyin.bs;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.instance.impl.Instances;
 import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.lang.CharUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
-import com.github.houbb.heaven.util.util.CharsetUtil;
 import com.github.houbb.pinyin.api.IPinyin;
 import com.github.houbb.pinyin.spi.IPinyinAppender;
 import com.github.houbb.pinyin.spi.IPinyinChinese;
 import com.github.houbb.pinyin.spi.IPinyinSegment;
 import com.github.houbb.pinyin.spi.IPinyinTone;
 import com.github.houbb.pinyin.support.appender.StringBuilderPinyinAppender;
-import com.github.houbb.pinyin.support.chinese.SimplePinyinChinese;
+import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.support.mapping.DefaultPinyinTone;
-import com.github.houbb.pinyin.support.segment.CharPinyinSegment;
 import com.github.houbb.pinyin.support.segment.DefaultPinyinSegment;
 import com.github.houbb.pinyin.support.segment.SinglePinyinSegment;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,7 +38,7 @@ public final class PinyinBs implements IPinyin {
      * 中文服务类
      * @since 0.0.1
      */
-    private IPinyinChinese pinyinChinese = Instances.singleton(SimplePinyinChinese.class);
+    private IPinyinChinese pinyinChinese = PinyinChineses.simple();
 
     /**
      * 注音映射

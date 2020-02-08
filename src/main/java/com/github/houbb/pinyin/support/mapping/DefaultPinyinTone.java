@@ -1,11 +1,15 @@
 package com.github.houbb.pinyin.support.mapping;
 
 import com.github.houbb.heaven.annotation.ThreadSafe;
+import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.io.StreamUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.github.houbb.pinyin.constant.PinyinConst;
+import com.github.houbb.pinyin.spi.IPinyinChinese;
+import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 
 import java.util.List;
 import java.util.Map;
@@ -67,6 +71,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
     /**
      * 获取单个字符的 map
+     *
      * @return map
      * @since 0.0.1
      */
@@ -77,14 +82,31 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(charMap)) {
-                List<String> lines = StreamUtil.readAllLines("/pinyin_dict_char.txt");
+                final long startTime = System.currentTimeMillis();
+                final IPinyinChinese pinyinChinese = PinyinChineses.simple();
+
+                List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
+                // 自定义词库
+                List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
+                lines.addAll(defineLines);
                 charMap = Guavas.newHashMap(lines.size());
 
                 for(String line : lines) {
-                    String[] strings = line.split(":");
+                    String[] strings = line.split(PunctuationConst.COLON);
                     List<String> pinyinList = StringUtil.splitToList(strings[1]);
-                    charMap.put(strings[0], pinyinList);
+
+                    final String word = strings[0];
+                    charMap.put(word, pinyinList);
+
+                    // 转换为简体，再一次存储
+                    String simple = pinyinChinese.toSimple(word);
+                    if(!word.equals(simple)) {
+                        charMap.put(simple, pinyinList);
+                    }
                 }
+
+                final long endTime = System.currentTimeMillis();
+                System.out.println("[Pinyin] char dict loaded, cost time " + (endTime-startTime)+" ms!");
             }
         }
 
@@ -103,13 +125,29 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         }
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(phraseMap)) {
-                List<String> lines = StreamUtil.readAllLines("/pinyin_dict_phrase.txt");
+                final long startTime = System.currentTimeMillis();
+                final IPinyinChinese pinyinChinese = PinyinChineses.simple();
+
+                List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
+                // 处理自定义字典
+                List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_DEFINE);
+                lines.addAll(defineLines);
                 phraseMap = Guavas.newHashMap(lines.size());
 
                 for(String line : lines) {
-                    String[] strings = line.split(":");
-                    phraseMap.put(strings[0], strings[1]);
+                    String[] strings = line.split(PunctuationConst.COLON);
+                    String word = strings[0];
+                    phraseMap.put(word, strings[1]);
+
+                    // 转换为简体，再一次存储
+                    String simple = pinyinChinese.toSimple(word);
+                    if(!word.equals(simple)) {
+                        phraseMap.put(simple, strings[1]);
+                    }
                 }
+
+                final long endTime = System.currentTimeMillis();
+                System.out.println("[Pinyin] phrase dict loaded, cost time " + (endTime-startTime)+" ms!");
             }
         }
 

@@ -2,6 +2,7 @@ package com.github.houbb.pinyin.util;
 
 import com.github.houbb.heaven.util.io.StreamUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
+import com.github.houbb.pinyin.constant.PinyinConst;
 import com.github.houbb.pinyin.model.ToneItem;
 
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public final class ToneHelper {
     static {
         TONE_ITEM_MAP = new HashMap<>(34);
 
-        List<String> allLines = StreamUtil.readAllLines("/pinyin_dict_tone.txt");
+        List<String> allLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_TONE_SYSTEM);
         for(String line : allLines) {
             String[] strings = line.split(StringUtil.BLANK);
             ToneItem item = ToneItem.of(strings[0].charAt(0), Integer.parseInt(strings[1]));
