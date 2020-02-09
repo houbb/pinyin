@@ -3,8 +3,11 @@ package com.github.houbb.pinyin.bs;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.instance.impl.Instances;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.lang.CharUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.pinyin.api.IPinyin;
+import com.github.houbb.pinyin.constant.enums.PinyinStyleEnum;
 import com.github.houbb.pinyin.spi.IPinyinAppender;
 import com.github.houbb.pinyin.spi.IPinyinChinese;
 import com.github.houbb.pinyin.spi.IPinyinSegment;
@@ -12,6 +15,7 @@ import com.github.houbb.pinyin.spi.IPinyinTone;
 import com.github.houbb.pinyin.support.appender.StringBuilderPinyinAppender;
 import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.support.mapping.DefaultPinyinTone;
+import com.github.houbb.pinyin.support.mapping.PinyinToneStyles;
 import com.github.houbb.pinyin.support.segment.DefaultPinyinSegment;
 import com.github.houbb.pinyin.support.segment.SinglePinyinSegment;
 
@@ -131,6 +135,28 @@ public final class PinyinBs implements IPinyin {
         }
 
         return Collections.singletonList(original);
+    }
+
+    @Override
+    public boolean hasSamePinyin(char chineseOne, char chineseTwo) {
+        if(pinyinChinese.isChinese(chineseOne) && pinyinChinese.isChinese(chineseTwo)) {
+            //fast-return
+            if(chineseOne == chineseTwo) {
+                return true;
+            }
+
+            String simpleOne = pinyinChinese.toSimple(chineseOne);
+            String simpleTwo = pinyinChinese.toSimple(chineseTwo);
+
+            final IPinyinTone pinyinTone = PinyinToneStyles.getTone(PinyinStyleEnum.NORMAL);
+            List<String> tonesOne = pinyinTone.toneList(simpleOne);
+            List<String> tonesTwo = pinyinTone.toneList(simpleTwo);
+
+            // 交集大于0
+            return CollectionUtil.containAny(tonesOne, tonesTwo);
+        }
+
+        return false;
     }
 
     /**

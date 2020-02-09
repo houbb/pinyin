@@ -29,6 +29,15 @@ public interface IPinyinChinese {
     boolean isChinese(final String original);
 
     /**
+     * 是否为中文
+     *
+     * @param original 原始字符串
+     * @return 是否
+     * @since 0.0.8
+     */
+    boolean isChinese(final char original);
+
+    /**
      * 转换为简体
      * （1）为了兼顾性能，避免两次分词。直接使用分词后的结果进行处理。
      * @param segment 分词后的字符串
@@ -36,5 +45,13 @@ public interface IPinyinChinese {
      * @since 0.0.1
      */
     String toSimple(final String segment);
+
+    /**
+     * 转换为简体
+     * @param original 原始的字符串
+     * @return 简体中文
+     * @since 0.0.8
+     */
+    String toSimple(final char original);
 
 }

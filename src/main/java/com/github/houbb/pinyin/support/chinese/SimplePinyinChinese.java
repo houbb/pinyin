@@ -25,6 +25,11 @@ public class SimplePinyinChinese implements IPinyinChinese {
     }
 
     @Override
+    public boolean isChinese(char original) {
+        return CharUtil.isChinese(original);
+    }
+
+    @Override
     public String toSimple(String segment) {
         if(StringUtil.isEmptyTrim(segment)) {
             return segment;
@@ -46,6 +51,16 @@ public class SimplePinyinChinese implements IPinyinChinese {
 
         // 当然也可以直接使用 opencc4j，后期优化后统一调整。
         return buffer.toString();
+    }
+
+    @Override
+    public String toSimple(char original) {
+        if(isChinese(original)) {
+            char simpleChar = CharFormats.chineseSimple().format(original);
+            return String.valueOf(simpleChar);
+        }
+
+        return String.valueOf(original);
     }
 
 }

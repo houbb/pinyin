@@ -27,4 +27,13 @@ public interface IPinyin {
      */
     List<String> toPinyin(final char chinese);
 
+    /**
+     * 是否为同音字
+     * @param chineseOne 中文一
+     * @param chineseTwo 中文二
+     * @return 是否相同
+     * @since 0.0.8
+     */
+    boolean hasSamePinyin(final char chineseOne, final char chineseTwo);
+
 }

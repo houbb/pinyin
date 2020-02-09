@@ -33,6 +33,10 @@
 
 - 支持自定义拼音词库
 
+### v0.0.8 新特性
+
+- 支持判断是否为同音字
+
 # 快速开始
 
 ## 准备
@@ -45,7 +49,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
 </dependency>
 ```
 
@@ -139,6 +143,21 @@ Assert.assertEquals("w a z w", pinyin);
 
 # 更多特性
 
+## 是否为同音字
+
+`PinyinHelper.hasSamePinyin()` 用来判断两个汉字是否为同音字，包括对多音字的处理。
+
+```java
+char one = '花';
+char two = '重';
+char three = '中';
+char four = '虫';
+
+Assert.assertFalse(PinyinHelper.hasSamePinyin(one, three));
+Assert.assertTrue(PinyinHelper.hasSamePinyin(two, three));
+Assert.assertTrue(PinyinHelper.hasSamePinyin(two, four));
+```
+
 ## 支持繁体中文
 
 本框架支持繁体中文获取对应拼音。
@@ -201,11 +220,15 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 
 # 后期 Road-Map
 
-- 支持同音字列表
+- 同音字列表返回
+
+- 谐音字判断
+
+- 谐音字列表返回
 
 - 拼音转汉字
 
-# benchmark
+# Benchmark
 
 测试代码见 [BenchmarkTest.java](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/benchmark/BenchmarkTest.java)
 

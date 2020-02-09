@@ -58,4 +58,15 @@ public final class PinyinHelper {
         return PinyinBs.newInstance().toPinyin(chinese);
     }
 
+    /**
+     * 是否拥有相同的拼音
+     * @param chineseOne 汉字一
+     * @param chineseTwo 汉字二
+     * @return 是否相同
+     * @since 0.0.8
+     */
+    public static boolean hasSamePinyin(final char chineseOne, final char chineseTwo) {
+        return PinyinBs.newInstance().hasSamePinyin(chineseOne, chineseTwo);
+    }
+
 }
