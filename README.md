@@ -33,9 +33,11 @@
 
 - 支持自定义拼音词库
 
-### v0.0.8 新特性
-
 - 支持判断是否为同音字
+
+### v0.0.9 新特性
+
+- 修复词组拼音格式化 BUG
 
 # 快速开始
 
@@ -49,7 +51,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
 </dependency>
 ```
 

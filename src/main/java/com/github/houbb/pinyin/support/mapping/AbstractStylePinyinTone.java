@@ -1,10 +1,13 @@
 package com.github.houbb.pinyin.support.mapping;
 
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.pinyin.model.CharToneInfo;
 import com.github.houbb.pinyin.model.ToneItem;
 import com.github.houbb.pinyin.util.ToneHelper;
+
+import java.util.List;
 
 /**
  * 抽象拼音格式化实现类
@@ -91,12 +94,13 @@ public abstract class AbstractStylePinyinTone extends DefaultPinyinTone {
     private String getPhraseFormat(final String phraseTone) {
         String[] strings = phraseTone.split(StringUtil.BLANK);
 
-        StringBuilder stringBuffer = new StringBuilder();
-
+        List<String> toneList = Guavas.newArrayList(strings.length);
         for(String string : strings) {
-            stringBuffer.append(string);
+            CharToneInfo toneInfo = getCharToneInfo(string);
+            String formatTone = getCharFormat(string, toneInfo);
+            toneList.add(formatTone);
         }
-        return stringBuffer.toString();
+        return StringUtil.join(toneList, StringUtil.BLANK);
     }
 
     /**
