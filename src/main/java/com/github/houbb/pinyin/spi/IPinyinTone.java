@@ -36,4 +36,15 @@ public interface IPinyinTone {
      */
     Set<String> phraseSet();
 
+    /**
+     * 根据中文获取对应的拼音声调
+     *
+     * 1. 这里暂时没有考虑多音字的问题。
+     * 2. 如果考虑内容不是单个字，那么结果应该变为一个列表。
+     * @param chinese 中文
+     * @return 声调
+     * @since 0.1.0
+     */
+    int toneNum(final String chinese);
+
 }

@@ -35,9 +35,9 @@
 
 - 支持判断是否为同音字
 
-### v0.0.9 新特性
+### v0.1.0 新特性
 
-- 修复词组拼音格式化 BUG
+- 支持单独获取声调信息
 
 # 快速开始
 
@@ -51,7 +51,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.0.9</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 

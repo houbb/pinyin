@@ -40,33 +40,8 @@ public abstract class AbstractStylePinyinTone extends DefaultPinyinTone {
         }
 
         // 进行格式化
-        CharToneInfo toneInfo = getCharToneInfo(tone);
+        CharToneInfo toneInfo = super.getCharToneInfo(tone);
         return getCharFormat(tone, toneInfo);
-    }
-
-    /**
-     * 获取对应的声调信息
-     * @param segment 分词结果
-     * @return 声调信息
-     * @since 0.0.3
-     */
-    private CharToneInfo getCharToneInfo(final String segment) {
-        CharToneInfo charToneInfo = new CharToneInfo();
-        charToneInfo.setIndex(-1);
-
-        int length = segment.length();
-        for(int i = 0; i < length; i++) {
-            char currentChar = segment.charAt(i);
-            ToneItem toneItem = ToneHelper.getToneItem(currentChar);
-
-            if (ObjectUtil.isNotNull(toneItem)) {
-                charToneInfo.setToneItem(toneItem);
-                charToneInfo.setIndex(i);
-                break;
-            }
-        }
-
-        return charToneInfo;
     }
 
     @Override
@@ -96,7 +71,7 @@ public abstract class AbstractStylePinyinTone extends DefaultPinyinTone {
 
         List<String> toneList = Guavas.newArrayList(strings.length);
         for(String string : strings) {
-            CharToneInfo toneInfo = getCharToneInfo(string);
+            CharToneInfo toneInfo = super.getCharToneInfo(string);
             String formatTone = getCharFormat(string, toneInfo);
             toneList.add(formatTone);
         }

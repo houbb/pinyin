@@ -36,4 +36,13 @@ public interface IPinyin {
      */
     boolean hasSamePinyin(final char chineseOne, final char chineseTwo);
 
+    /**
+     * 获取拼音的音调编号
+     * 12345
+     * @param chinese 中文拼音
+     * @return 结果
+     * @since 0.1.0
+     */
+    int toneNum(final char chinese);
+
 }

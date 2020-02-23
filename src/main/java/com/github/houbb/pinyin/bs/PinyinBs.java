@@ -3,11 +3,11 @@ package com.github.houbb.pinyin.bs;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.instance.impl.Instances;
 import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.lang.CharUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.pinyin.api.IPinyin;
 import com.github.houbb.pinyin.constant.enums.PinyinStyleEnum;
+import com.github.houbb.pinyin.constant.enums.PinyinToneNumEnum;
 import com.github.houbb.pinyin.spi.IPinyinAppender;
 import com.github.houbb.pinyin.spi.IPinyinChinese;
 import com.github.houbb.pinyin.spi.IPinyinSegment;
@@ -157,6 +157,20 @@ public final class PinyinBs implements IPinyin {
         }
 
         return false;
+    }
+
+    @Override
+    public int toneNum(char chinese) {
+        String original = String.valueOf(chinese);
+        if(pinyinChinese.isChinese(original)) {
+            String simple = pinyinChinese.toSimple(original);
+
+            // 处理音调信息
+            return pinyinTone.toneNum(simple);
+        }
+
+        // 返回0，表示不是中文
+        return PinyinToneNumEnum.UN_KNOWN.num();
     }
 
     /**

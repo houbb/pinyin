@@ -69,4 +69,14 @@ public final class PinyinHelper {
         return PinyinBs.newInstance().hasSamePinyin(chineseOne, chineseTwo);
     }
 
+    /**
+     * 获取拼音的声调
+     * @param chineseChar 中文字符
+     * @return 结果
+     * @since 0.1.0
+     */
+    public static int toneNum(final char chineseChar) {
+        return PinyinBs.newInstance().toneNum(chineseChar);
+    }
+
 }

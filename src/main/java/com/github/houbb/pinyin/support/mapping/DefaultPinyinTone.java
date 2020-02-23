@@ -8,8 +8,12 @@ import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.pinyin.constant.PinyinConst;
+import com.github.houbb.pinyin.constant.enums.PinyinToneNumEnum;
+import com.github.houbb.pinyin.model.CharToneInfo;
+import com.github.houbb.pinyin.model.ToneItem;
 import com.github.houbb.pinyin.spi.IPinyinChinese;
 import com.github.houbb.pinyin.support.chinese.PinyinChineses;
+import com.github.houbb.pinyin.util.ToneHelper;
 
 import java.util.List;
 import java.util.Map;
@@ -158,6 +162,54 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     public Set<String> phraseSet() {
         Map<String, String> map = getPhraseMap();
         return map.keySet();
+    }
+
+    @Override
+    public int toneNum(String chinese) {
+        //1. 获取拼音
+        final String tone = getCharTone(chinese);
+
+        if(StringUtil.isNotEmpty(tone)) {
+            CharToneInfo toneInfo = this.getCharToneInfo(tone);
+
+            int index = toneInfo.getIndex();
+
+            // 轻声
+            if (index < 0) {
+                return PinyinToneNumEnum.FIVE.num();
+            }
+
+            // 直接返回对应的音标
+            return toneInfo.getToneItem().getTone();
+        }
+
+        // 默认返回未知
+        return PinyinToneNumEnum.UN_KNOWN.num();
+    }
+
+    /**
+     * 获取对应的声调信息
+     * @param tone 拼音信息
+     * @return 声调信息
+     * @since 0.0.3
+     */
+    protected CharToneInfo getCharToneInfo(final String tone) {
+        CharToneInfo charToneInfo = new CharToneInfo();
+        charToneInfo.setIndex(-1);
+
+        int length = tone.length();
+        for(int i = 0; i < length; i++) {
+            char currentChar = tone.charAt(i);
+            ToneItem toneItem = ToneHelper.getToneItem(currentChar);
+
+            if (ObjectUtil.isNotNull(toneItem)) {
+                charToneInfo.setToneItem(toneItem);
+                charToneInfo.setIndex(i);
+                break;
+            }
+        }
+
+        return charToneInfo;
     }
 
 }
