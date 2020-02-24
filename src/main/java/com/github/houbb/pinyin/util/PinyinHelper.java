@@ -3,8 +3,8 @@ package com.github.houbb.pinyin.util;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.pinyin.bs.PinyinBs;
 import com.github.houbb.pinyin.constant.enums.PinyinStyleEnum;
-import com.github.houbb.pinyin.spi.IPinyinTone;
-import com.github.houbb.pinyin.support.mapping.PinyinToneStyles;
+import com.github.houbb.pinyin.spi.IPinyinToneStyle;
+import com.github.houbb.pinyin.support.style.PinyinToneStyles;
 
 import java.util.List;
 
@@ -41,21 +41,32 @@ public final class PinyinHelper {
             return string;
         }
 
-        final IPinyinTone pinyinTone = PinyinToneStyles.getTone(styleEnum);
+        final IPinyinToneStyle style = PinyinToneStyles.getTone(styleEnum);
         return PinyinBs.newInstance()
-                .pinyinTone(pinyinTone)
+                .style(style)
                 .toPinyin(string);
     }
-
 
     /**
      * 返回拼音列表
      * @param chinese 中文字符
      * @return 结果
-     * @since 0.0.2
+     * @since 0.1.1
      */
-    public static List<String> toPinyin(final char chinese) {
-        return PinyinBs.newInstance().toPinyin(chinese);
+    public static List<String> toPinyinList(final char chinese) {
+        return PinyinBs.newInstance().toPinyinList(chinese);
+    }
+
+    /**
+     * 返回拼音列表
+     * @param chinese 中文字符
+     * @param styleEnum 指定样式
+     * @return 结果
+     * @since 0.1.1
+     */
+    public static List<String> toPinyinList(final char chinese, final PinyinStyleEnum styleEnum) {
+        final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(styleEnum);
+        return PinyinBs.newInstance().style(pinyinTone).toPinyinList(chinese);
     }
 
     /**
@@ -71,12 +82,46 @@ public final class PinyinHelper {
 
     /**
      * 获取拼音的声调
-     * @param chineseChar 中文字符
-     * @return 结果
-     * @since 0.1.0
+     *
+     * @param chinese 中文字符串
+     * @return 音调列表
+     * @since 0.1.1
      */
-    public static int toneNum(final char chineseChar) {
-        return PinyinBs.newInstance().toneNum(chineseChar);
+    public static List<Integer> toneNumList(final String chinese) {
+        return PinyinBs.newInstance().toneNumList(chinese);
+    }
+
+    /**
+     * 获取拼音的声调
+     *
+     * @param chinese 中文字符
+     * @return 音调列表
+     * @since 0.1.1
+     */
+    public static List<Integer> toneNumList(final char chinese) {
+        return PinyinBs.newInstance().toneNumList(chinese);
+    }
+
+    /**
+     * 转换为声母列表
+     * @param chinese 中文
+     * @return 结果
+     * @since 0.1.1
+     */
+    public static List<String> shengMuList(final String chinese) {
+        final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(PinyinStyleEnum.NORMAL);
+        return PinyinBs.newInstance().style(pinyinTone).shengMuList(chinese);
+    }
+
+    /**
+     * 转换为韵母列表
+     * @param chinese 中文
+     * @return 结果
+     * @since 0.1.1
+     */
+    public static List<String> yunMuList(final String chinese) {
+        final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(PinyinStyleEnum.NORMAL);
+        return PinyinBs.newInstance().style(pinyinTone).yunMuList(chinese);
     }
 
 }

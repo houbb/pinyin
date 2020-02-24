@@ -1,0 +1,101 @@
+package com.github.houbb.pinyin.api.impl;
+
+import com.github.houbb.pinyin.api.IPinyinContext;
+import com.github.houbb.pinyin.spi.*;
+
+/**
+ * 拼音核心用户 api
+ * @author binbin.hou
+ * @since 0.1.1
+ */
+public class PinyinContext implements IPinyinContext {
+
+    /**
+     * 格式
+     * @since 0.1.1
+     */
+    private IPinyinToneStyle style;
+
+    /**
+     * 分词实现
+     * @since 0.1.1
+     */
+    private IPinyinSegment segment;
+
+    /**
+     * 拼音数据实现
+     * @since 0.1.1
+     */
+    private IPinyinData data;
+
+    /**
+     * 中文服务类
+     * @since 0.0.1
+     */
+    private IPinyinChinese chinese;
+
+    /**
+     * 注音实现
+     * @since 0.0.1
+     */
+    private IPinyinTone tone;
+
+    /**
+     * 返回实例
+     * @since 0.1.1
+     * @return 结果
+     */
+    public static PinyinContext newInstance() {
+        return new PinyinContext();
+    }
+
+    @Override
+    public IPinyinToneStyle style() {
+        return style;
+    }
+
+    public PinyinContext style(IPinyinToneStyle style) {
+        this.style = style;
+        return this;
+    }
+
+    @Override
+    public IPinyinSegment segment() {
+        return segment;
+    }
+
+    public PinyinContext segment(IPinyinSegment segment) {
+        this.segment = segment;
+        return this;
+    }
+
+    @Override
+    public IPinyinData data() {
+        return data;
+    }
+
+    public PinyinContext data(IPinyinData data) {
+        this.data = data;
+        return this;
+    }
+
+    @Override
+    public IPinyinChinese chinese() {
+        return chinese;
+    }
+
+    public PinyinContext chinese(IPinyinChinese chinese) {
+        this.chinese = chinese;
+        return this;
+    }
+
+    @Override
+    public IPinyinTone tone() {
+        return tone;
+    }
+
+    public PinyinContext tone(IPinyinTone tone) {
+        this.tone = tone;
+        return this;
+    }
+}

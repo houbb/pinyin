@@ -1,7 +1,8 @@
-package com.github.houbb.pinyin.support.mapping;
+package com.github.houbb.pinyin.support.tone;
 
 import com.github.houbb.heaven.annotation.ThreadSafe;
 import com.github.houbb.heaven.constant.PunctuationConst;
+import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.io.StreamUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
@@ -12,6 +13,7 @@ import com.github.houbb.pinyin.constant.enums.PinyinToneNumEnum;
 import com.github.houbb.pinyin.model.CharToneInfo;
 import com.github.houbb.pinyin.model.ToneItem;
 import com.github.houbb.pinyin.spi.IPinyinChinese;
+import com.github.houbb.pinyin.spi.IPinyinToneStyle;
 import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.util.ToneHelper;
 
@@ -51,17 +53,25 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     private static volatile Map<String, String> phraseMap;
 
     @Override
-    protected List<String> getCharTones(String chinese) {
-        return getCharMap().get(chinese);
+    protected List<String> getCharTones(String chinese, final IPinyinToneStyle toneStyle) {
+        List<String> defaultList = getCharMap().get(chinese);
+
+        return CollectionUtil.toList(defaultList, new IHandler<String, String>() {
+            @Override
+            public String handle(String s) {
+                return toneStyle.style(s);
+            }
+        });
     }
 
     @Override
-    protected String getCharTone(String segment) {
+    protected String getCharTone(String segment, final IPinyinToneStyle toneStyle) {
         // 大部分拼音都是单个字，不是多音字。
         // 直接在初始化的时候，设置好。
         List<String> pinyinList = getCharMap().get(segment);
         if(CollectionUtil.isNotEmpty(pinyinList)) {
-            return pinyinList.get(0);
+            final String firstPinyin = pinyinList.get(0);
+            return toneStyle.style(firstPinyin);
         }
 
         // 没有则返回空
@@ -69,8 +79,22 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     }
 
     @Override
-    protected String getPhraseTone(String segment) {
-        return getPhraseMap().get(segment);
+    protected String getPhraseTone(String segment, final IPinyinToneStyle toneStyle) {
+        String phrasePinyin = getPhraseMap().get(segment);
+
+        // 直接返回空
+        if(StringUtil.isEmptyTrim(phrasePinyin)) {
+            return StringUtil.EMPTY;
+        }
+
+        String[] strings = phrasePinyin.split(StringUtil.BLANK);
+        List<String> resultList = Guavas.newArrayList(strings.length);
+
+        for(String string : strings) {
+            final String style = toneStyle.style(string);
+            resultList.add(style);
+        }
+        return StringUtil.join(resultList, StringUtil.BLANK);
     }
 
     /**
@@ -165,12 +189,10 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     }
 
     @Override
-    public int toneNum(String chinese) {
+    public int toneNum(String defaultPinyin) {
         //1. 获取拼音
-        final String tone = getCharTone(chinese);
-
-        if(StringUtil.isNotEmpty(tone)) {
-            CharToneInfo toneInfo = this.getCharToneInfo(tone);
+        if(StringUtil.isNotEmpty(defaultPinyin)) {
+            CharToneInfo toneInfo = this.getCharToneInfo(defaultPinyin);
 
             int index = toneInfo.getIndex();
 

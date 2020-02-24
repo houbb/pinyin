@@ -3,7 +3,7 @@ package com.github.houbb.pinyin.support.segment.trie;
 import com.github.houbb.heaven.annotation.ThreadSafe;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.nlp.common.dfa.tree.impl.AbstractTrieTreeMap;
-import com.github.houbb.pinyin.support.mapping.PinyinToneStyles;
+import com.github.houbb.pinyin.support.tone.PinyinTones;
 
 import java.util.Collection;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class DefaultPinyinTrieTreeMap extends AbstractTrieTreeMap {
 
     @Override
     protected Collection<String> getWordCollection() {
-        return PinyinToneStyles.defaults().phraseSet();
+        return PinyinTones.defaults().phraseSet();
     }
 
 }

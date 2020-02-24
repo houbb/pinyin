@@ -1,5 +1,6 @@
 package com.github.houbb.pinyin.test.util;
 
+import com.github.houbb.pinyin.constant.enums.PinyinStyleEnum;
 import com.github.houbb.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -49,8 +50,18 @@ public class PinyinHelperTest {
      */
     @Test
     public void toPinyinListTest() {
-        List<String> pinyinList = PinyinHelper.toPinyin('重');
+        List<String> pinyinList = PinyinHelper.toPinyinList('重');
         Assert.assertEquals("[zhòng, chóng, tóng]", pinyinList.toString());
+    }
+
+    /**
+     * 返回多音字列表测试
+     * @since 0.1.1
+     */
+    @Test
+    public void toPinyinListNormalTest() {
+        List<String> pinyinList = PinyinHelper.toPinyinList('重', PinyinStyleEnum.NORMAL);
+        Assert.assertEquals("[zhong, chong, tong]", pinyinList.toString());
     }
 
     /**

@@ -124,7 +124,7 @@ public class BenchmarkTest {
      */
     @Test
     public void pinyinCharTest() {
-        List<String> result = com.github.houbb.pinyin.util.PinyinHelper.toPinyin('重');
+        List<String> result = com.github.houbb.pinyin.util.PinyinHelper.toPinyinList('重');
         System.out.println(result);
 
         // 验证
@@ -135,7 +135,7 @@ public class BenchmarkTest {
         for(int i = 0; i < SINGLE_TIMES; i++) {
             int index = ThreadLocalRandom.current().nextInt(text.length()-1);
 
-            com.github.houbb.pinyin.util.PinyinHelper.toPinyin(text.charAt(index));
+            com.github.houbb.pinyin.util.PinyinHelper.toPinyinList(text.charAt(index));
         }
         long endTime = System.currentTimeMillis();
         System.out.println("Pinyin cost: " + (endTime-startTime));

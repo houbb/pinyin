@@ -1,4 +1,4 @@
-package com.github.houbb.pinyin.support.data;
+package com.github.houbb.pinyin.spi;
 
 /**
  * 声母韵母

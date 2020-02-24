@@ -1,6 +1,7 @@
 package com.github.houbb.pinyin.test.util;
 
 import com.github.houbb.pinyin.constant.enums.PinyinToneNumEnum;
+import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.util.PinyinHelper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,17 +13,40 @@ import org.junit.Test;
  */
 public class PinyinHelperToneNumTest {
 
+    /**
+     * 音调列表测试
+     * @since 0.1.1
+     */
     @Test
-    public void toneNumTest() {
+    public void toneNumListTest() {
         final char ch = '赵';
         final char ch2 = '钱';
         final char ch3 = '孙';
         final char ch4 = '李';
 
-        Assert.assertEquals(PinyinToneNumEnum.FOUR.num(), PinyinHelper.toneNum(ch));
-        Assert.assertEquals(PinyinToneNumEnum.TWO.num(), PinyinHelper.toneNum(ch2));
-        Assert.assertEquals(PinyinToneNumEnum.ONE.num(), PinyinHelper.toneNum(ch3));
-        Assert.assertEquals(PinyinToneNumEnum.THREE.num(), PinyinHelper.toneNum(ch4));
+        Assert.assertEquals("[4, 4]", PinyinHelper.toneNumList(ch).toString());
+        Assert.assertEquals("[2]", PinyinHelper.toneNumList(ch2).toString());
+        Assert.assertEquals("[1, 4]", PinyinHelper.toneNumList(ch3).toString());
+        Assert.assertEquals("[3]", PinyinHelper.toneNumList(ch4).toString());
+    }
+
+    /**
+     * 音调列表测试
+     * @since 0.1.1
+     */
+    @Test
+    public void toneNumList2Test() {
+        final String text = "赵钱孙李";
+
+        Assert.assertEquals("[4, 2, 1, 3]", PinyinHelper.toneNumList(text).toString());
+    }
+
+    @Test
+    public void initTest() {
+        String simple = PinyinChineses.simple().toSimple("赵");
+        System.out.println(simple);
+
+        System.out.println(PinyinHelper.toPinyinList('赵'));
     }
 
     @Test

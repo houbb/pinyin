@@ -35,9 +35,11 @@
 
 - 支持判断是否为同音字
 
-### v0.1.0 新特性
-
 - 支持单独获取声调信息
+
+### v0.1.1 新特性
+
+- 支持获取声母韵母信息
 
 # 快速开始
 
@@ -51,7 +53,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
@@ -70,10 +72,10 @@ Assert.assertEquals("wǒ ài zhōng wén", pinyin);
 
 ### 返回多音字列表
 
-使用 `PinyinHelper.toPinyin(char)` 获取多音字的读音列表。
+使用 `PinyinHelper.toPinyinList(char)` 获取多音字的读音列表。
 
 ```java
-List<String> pinyinList = PinyinHelper.toPinyin('重');
+List<String> pinyinList = PinyinHelper.toPinyinList('重');
 Assert.assertEquals("[zhòng, chóng, tóng]", pinyinList.toString());
 ```
 

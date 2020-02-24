@@ -1,9 +1,11 @@
-package com.github.houbb.pinyin.support.mapping;
+package com.github.houbb.pinyin.support.tone;
 
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.github.houbb.pinyin.api.IPinyinContext;
 import com.github.houbb.pinyin.spi.IPinyinTone;
+import com.github.houbb.pinyin.spi.IPinyinToneStyle;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,36 +21,40 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
     /**
      * 获取单个字的映射
      * @param segment 单个的字
+     * @param toneStyle 拼音格式
      * @return 结果
      * @since 0.0.1
      */
-    protected abstract String getCharTone(final String segment);
+    protected abstract String getCharTone(final String segment, final IPinyinToneStyle toneStyle);
 
     /**
      * 获取单个字符的所有拼音列表
      * @param chinese 中文字符
+     * @param toneStyle 拼音格式
      * @return 结果列表
      * @since 0.0.2
      */
-    protected abstract List<String> getCharTones(final String chinese);
+    protected abstract List<String> getCharTones(final String chinese, final IPinyinToneStyle toneStyle);
 
     /**
      * 获取词组的映射
-     * @param segment 单个的字
+     * @param phraseTone 单个的字
+     * @param toneStyle 拼音格式
      * @return 结果
      * @since 0.0.1
      */
-    protected abstract String getPhraseTone(final String segment);
+    protected abstract String getPhraseTone(final String phraseTone, final IPinyinToneStyle toneStyle);
 
     @Override
-    public String tone(String segment) {
+    public String tone(String segment, final IPinyinContext context) {
         int length = segment.length();
+        final IPinyinToneStyle toneStyle = context.style();
 
         if(length == 1) {
-            getCharToneDefault(segment);
+            getCharToneDefault(segment, toneStyle);
         }
 
-        String result = getPhraseTone(segment);
+        String result = getPhraseTone(segment, toneStyle);
         if(StringUtil.isNotEmpty(result)) {
             return result;
         }
@@ -58,7 +64,7 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
         List<String> tones = CollectionUtil.toList(chars, new IHandler<String, String>() {
             @Override
             public String handle(String string) {
-                return getCharToneDefault(string);
+                return getCharToneDefault(string, toneStyle);
             }
         });
 
@@ -70,11 +76,12 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * 1. 如果有拼音，则返回对应的拼音
      * 2. 如果没有，则返回单个字符本身（比如字典中没有录入的繁体字等）
      * @param string 字符串
+     * @param toneStyle 格式化
      * @return 结果
      * @since 0.0.3
      */
-    private String getCharToneDefault(final String string) {
-        String pinyin = getCharTone(string);
+    private String getCharToneDefault(final String string, final IPinyinToneStyle toneStyle) {
+        String pinyin = getCharTone(string, toneStyle);
 
         if(StringUtil.isNotEmpty(pinyin)) {
             return pinyin;
@@ -84,18 +91,21 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
     }
 
     @Override
-    public List<String> toneList(String chinese) {
-        return getCharTonesDefault(chinese);
+    public List<String> toneList(String chinese, final IPinyinContext context) {
+        final IPinyinToneStyle toneStyle = context.style();
+
+        return getCharTonesDefault(chinese, toneStyle);
     }
 
     /**
      * 多音字列表的默认处理
      * @param chinese 英文字符
+     * @param toneStyle 拼音格式
      * @return 结果
      * @since 0.0.3
      */
-    private List<String> getCharTonesDefault(final String chinese) {
-        List<String> toneList = getCharTones(chinese);
+    private List<String> getCharTonesDefault(final String chinese, final IPinyinToneStyle toneStyle) {
+        List<String> toneList = getCharTones(chinese, toneStyle);
 
         if(CollectionUtil.isNotEmpty(toneList)) {
             return toneList;

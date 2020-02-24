@@ -1,4 +1,4 @@
-package com.github.houbb.pinyin.support.mapping;
+package com.github.houbb.pinyin.support.style;
 
 import com.github.houbb.heaven.annotation.ThreadSafe;
 import com.github.houbb.pinyin.model.CharToneInfo;
@@ -10,7 +10,7 @@ import com.github.houbb.pinyin.model.CharToneInfo;
  * @since 0.0.3
  */
 @ThreadSafe
-public class NumLastStylePinyinTone extends AbstractStylePinyinTone {
+public class NumLastPinyinToneStyle extends AbstractPinyinToneStyle {
 
     @Override
     protected String getCharFormat(String tone, CharToneInfo toneInfo) {

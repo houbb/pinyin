@@ -6,7 +6,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
 
     <properties>
         <!--============================== All PLUGINS START ==============================-->
@@ -28,6 +28,7 @@
 
         <!--============================== JAR START ==============================-->
         <!--inter-->
+        <heaven.version>0.1.82</heaven.version>
         <nlp-common.version>0.0.2</nlp-common.version>
 
         <!--other-->
@@ -36,7 +37,11 @@
 
     <dependencies>
         <!--============================== INTER ==============================-->
-
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>heaven</artifactId>
+            <version>${heaven.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.github.houbb</groupId>
             <artifactId>nlp-common</artifactId>

@@ -5,6 +5,7 @@ package com.github.houbb.pinyin.spi;
  * @author binbin.hou
  * @since 0.0.1
  */
+@Deprecated
 public interface IPinyinAppender extends CharSequence, Appendable {
 
     /**
