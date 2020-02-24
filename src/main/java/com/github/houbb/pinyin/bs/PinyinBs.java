@@ -73,6 +73,7 @@ public final class PinyinBs {
      * 设置样式
      * @param style 样式
      * @since 0.1.1
+     * @return this
      */
     public PinyinBs style(IPinyinToneStyle style) {
         ArgUtil.notNull(style, "style");
