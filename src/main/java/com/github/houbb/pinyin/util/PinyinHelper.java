@@ -1,5 +1,6 @@
 package com.github.houbb.pinyin.util;
 
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.pinyin.bs.PinyinBs;
 import com.github.houbb.pinyin.constant.enums.PinyinStyleEnum;
@@ -37,6 +38,21 @@ public final class PinyinHelper {
      */
     public static String toPinyin(final String string,
                                   final PinyinStyleEnum styleEnum) {
+        return toPinyin(string, styleEnum, StringUtil.BLANK);
+    }
+
+    /**
+     * 转换为拼音
+     * @param string 原始信息
+     * @param styleEnum 样式枚举
+     * @return 结果
+     * @since 0.1.2
+     */
+    public static String toPinyin(final String string,
+                                  final PinyinStyleEnum styleEnum,
+                                  final String connector) {
+        ArgUtil.notNull(connector, "connector");
+
         if(StringUtil.isEmptyTrim(string)) {
             return string;
         }
@@ -44,6 +60,7 @@ public final class PinyinHelper {
         final IPinyinToneStyle style = PinyinToneStyles.getTone(styleEnum);
         return PinyinBs.newInstance()
                 .style(style)
+                .connector(connector)
                 .toPinyin(string);
     }
 

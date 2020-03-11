@@ -2,6 +2,7 @@ package com.github.houbb.pinyin.bs;
 
 import com.github.houbb.heaven.support.instance.impl.Instances;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.pinyin.api.IPinyin;
 import com.github.houbb.pinyin.api.IPinyinContext;
 import com.github.houbb.pinyin.api.impl.Pinyin;
@@ -61,6 +62,12 @@ public final class PinyinBs {
     private IPinyin pinyin = Instances.singleton(Pinyin.class);
 
     /**
+     * 连接符号
+     * @since 0.1.2
+     */
+    private String connector = StringUtil.BLANK;
+
+    /**
      * 新建引导类实例
      * @return 引导类
      * @since 0.0.1
@@ -79,6 +86,17 @@ public final class PinyinBs {
         ArgUtil.notNull(style, "style");
 
         this.style = style;
+        return this;
+    }
+
+    /**
+     * 设置连接符号
+     * @param connector 连接符号
+     * @return this
+     * @since 0.1.2
+     */
+    public PinyinBs connector(String connector) {
+        this.connector = connector;
         return this;
     }
 
@@ -164,7 +182,8 @@ public final class PinyinBs {
                 .data(data)
                 .segment(pinyinSegment)
                 .style(style)
-                .tone(pinyinTone);
+                .tone(pinyinTone)
+                .connector(connector);
     }
 
 }

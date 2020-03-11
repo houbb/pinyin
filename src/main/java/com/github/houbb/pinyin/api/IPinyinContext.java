@@ -44,4 +44,11 @@ public interface IPinyinContext {
      */
     IPinyinTone tone();
 
+    /**
+     * 连接符
+     * @since 0.1.2
+     * @return 连接符
+     */
+    String connector();
+
 }

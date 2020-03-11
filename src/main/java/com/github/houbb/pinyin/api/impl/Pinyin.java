@@ -25,7 +25,8 @@ public class Pinyin implements IPinyin {
     @Override
     public String toPinyin(String string, IPinyinContext context) {
         List<String> stringList = toPinyinList(string, context);
-        return StringUtil.join(stringList, StringUtil.BLANK);
+        final String connector = context.connector();
+        return StringUtil.join(stringList, connector);
     }
 
     @Override

@@ -37,9 +37,11 @@
 
 - 支持单独获取声调信息
 
-### v0.1.1 新特性
-
 - 支持获取声母韵母信息
+
+### v0.1.2 新特性
+
+- 支持指定拼音连接符号
 
 # 快速开始
 
@@ -53,7 +55,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
 </dependency>
 ```
 
@@ -144,6 +146,17 @@ Assert.assertEquals("wo3 ai4 zhong1 wen2", pinyin);
 String pinyin = PinyinHelper.toPinyin("我爱中文", PinyinStyleEnum.FIRST_LETTER);
 Assert.assertEquals("w a z w", pinyin);
 ```
+
+### 首字母指定连接符号
+
+汉字转拼音一个常见的用途就是做检索，有时候使用者希望指定特定的连接符号。
+
+```java
+final String text = "我爱中文";
+Assert.assertEquals("wazw", PinyinHelper.toPinyin(text, PinyinStyleEnum.FIRST_LETTER, StringUtil.EMPTY));
+```
+
+第三个参数用于指定一个非 null 的字符串作为拼音连接符号。 （默认是空格进行连接）
 
 # 更多特性
 

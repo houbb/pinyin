@@ -41,6 +41,12 @@ public class PinyinContext implements IPinyinContext {
     private IPinyinTone tone;
 
     /**
+     * 连接符
+     * @since 0.1.2
+     */
+    private String connector;
+
+    /**
      * 返回实例
      * @since 0.1.1
      * @return 结果
@@ -96,6 +102,16 @@ public class PinyinContext implements IPinyinContext {
 
     public PinyinContext tone(IPinyinTone tone) {
         this.tone = tone;
+        return this;
+    }
+
+    @Override
+    public String connector() {
+        return connector;
+    }
+
+    public PinyinContext connector(String connector) {
+        this.connector = connector;
         return this;
     }
 }
