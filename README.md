@@ -147,9 +147,9 @@ String pinyin = PinyinHelper.toPinyin("我爱中文", PinyinStyleEnum.FIRST_LETT
 Assert.assertEquals("w a z w", pinyin);
 ```
 
-### 首字母指定连接符号
+### 指定连接符号
 
-汉字转拼音一个常见的用途就是做检索，有时候使用者希望指定特定的连接符号。
+有时候使用者希望指定特定的连接符号。
 
 ```java
 final String text = "我爱中文";

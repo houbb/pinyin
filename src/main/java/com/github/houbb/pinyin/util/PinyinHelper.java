@@ -45,6 +45,7 @@ public final class PinyinHelper {
      * 转换为拼音
      * @param string 原始信息
      * @param styleEnum 样式枚举
+     * @param connector 连接符号
      * @return 结果
      * @since 0.1.2
      */
