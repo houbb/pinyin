@@ -79,7 +79,9 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
     }
 
     @Override
-    protected String getPhraseTone(String segment, final IPinyinToneStyle toneStyle) {
+    protected String getPhraseTone(String segment,
+                                   final IPinyinToneStyle toneStyle,
+                                   final String connector) {
         String phrasePinyin = getPhraseMap().get(segment);
 
         // 直接返回空
@@ -94,7 +96,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
             final String style = toneStyle.style(string);
             resultList.add(style);
         }
-        return StringUtil.join(resultList, StringUtil.BLANK);
+        return StringUtil.join(resultList, connector);
     }
 
     /**

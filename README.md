@@ -39,9 +39,9 @@
 
 - 支持获取声母韵母信息
 
-### v0.1.2 新特性
+### v0.1.3 主要变更
 
-- 支持指定拼音连接符号
+- FIXED 空格问题
 
 # 快速开始
 
@@ -55,7 +55,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
 </dependency>
 ```
 
@@ -235,16 +235,6 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 
 2. 为了保持功能的一致性，如果你自定义的是繁体字（词），对应的简体也会变成自定义注音。 
 
-# 后期 Road-Map
-
-- 同音字列表返回
-
-- 谐音字判断
-
-- 谐音字列表返回
-
-- 拼音转汉字
-
 # Benchmark
 
 测试代码见 [BenchmarkTest.java](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/benchmark/BenchmarkTest.java)
@@ -274,3 +264,15 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 [pinyin-data](https://github.com/mozillazg/pinyin-data) 与 [phrase-pinyin-data](https://github.com/mozillazg/phrase-pinyin-data) 提供的拼音数据。
 
 [segment](https://github.com/houbb/segment) 提供的中文分词。
+
+# 后期 Road-Map
+
+- [ ] 键盘输入拼音形式支持
+
+- [ ] 同音字列表返回
+
+- [ ] 谐音字判断
+
+- [ ] 谐音字列表返回
+
+- [ ] 拼音转汉字

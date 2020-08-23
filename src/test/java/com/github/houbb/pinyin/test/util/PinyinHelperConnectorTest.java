@@ -25,4 +25,11 @@ public class PinyinHelperConnectorTest {
         Assert.assertEquals("wazw", PinyinHelper.toPinyin(text, PinyinStyleEnum.FIRST_LETTER, StringUtil.EMPTY));
     }
 
+    @Test
+    public void baseCaseTest() {
+        final String text = "这个是测试";
+        Assert.assertEquals("zgscs", PinyinHelper.toPinyin(text,
+                PinyinStyleEnum.FIRST_LETTER, StringUtil.EMPTY));
+    }
+
 }

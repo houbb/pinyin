@@ -40,21 +40,26 @@ public abstract class AbstractPinyinTone implements IPinyinTone {
      * 获取词组的映射
      * @param phraseTone 单个的字
      * @param toneStyle 拼音格式
+     * @param connector 连接符号
      * @return 结果
      * @since 0.0.1
      */
-    protected abstract String getPhraseTone(final String phraseTone, final IPinyinToneStyle toneStyle);
+    protected abstract String getPhraseTone(final String phraseTone,
+                                            final IPinyinToneStyle toneStyle,
+                                            final String connector);
 
     @Override
     public String tone(String segment, final IPinyinContext context) {
         int length = segment.length();
         final IPinyinToneStyle toneStyle = context.style();
+        // FIXED 6
+        final String connector = context.connector();
 
         if(length == 1) {
             getCharToneDefault(segment, toneStyle);
         }
 
-        String result = getPhraseTone(segment, toneStyle);
+        String result = getPhraseTone(segment, toneStyle, connector);
         if(StringUtil.isNotEmpty(result)) {
             return result;
         }
