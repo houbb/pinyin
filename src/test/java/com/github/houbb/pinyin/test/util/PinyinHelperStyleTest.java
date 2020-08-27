@@ -102,4 +102,12 @@ public class PinyinHelperStyleTest {
         Assert.assertEquals("d y", pinyin);
     }
 
+    @Test
+    public void inputTest() {
+        String text = "女孩";
+        String pinyin3 = PinyinHelper.toPinyin(text, PinyinStyleEnum.INPUT);
+        Assert.assertEquals("nv hai", pinyin3);
+    }
+
+
 }

@@ -50,6 +50,15 @@ public enum PinyinStyleEnum {
      * @since 0.0.1
      */
     FIRST_LETTER,
+
+    /**
+     * 输入法
+     *
+     * 主要针对：
+     * 女 绿
+     * @since 0.1.4
+     */
+    INPUT,
     ;
 
 }

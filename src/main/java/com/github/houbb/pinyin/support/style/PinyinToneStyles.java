@@ -35,6 +35,9 @@ public final class PinyinToneStyles {
         if(PinyinStyleEnum.FIRST_LETTER.equals(styleEnum)) {
             return firstLetter();
         }
+        if(PinyinStyleEnum.INPUT.equals(styleEnum)) {
+            return input();
+        }
 
         // 返回默认
         return defaults();
@@ -74,6 +77,15 @@ public final class PinyinToneStyles {
      */
     public static IPinyinToneStyle normal() {
         return Instances.singleton(NormalPinyinToneStyle.class);
+    }
+
+    /**
+     * 符合输入法的实现方式
+     * @return 实现
+     * @since 0.1.4
+     */
+    public static IPinyinToneStyle input() {
+        return Instances.singleton(InputToneStyle.class);
     }
 
 }

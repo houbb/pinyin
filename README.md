@@ -39,9 +39,9 @@
 
 - 支持获取声母韵母信息
 
-### v0.1.3 主要变更
+### v0.1.4 主要变更
 
-- FIXED 空格问题
+- 支持输入法的拼音模式
 
 # 快速开始
 
@@ -55,7 +55,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
 </dependency>
 ```
 
@@ -116,6 +116,7 @@ public static String toPinyin(final String string, final PinyinStyleEnum styleEn
 | `NORMAL` | 普通模式，即不带声调。| pin yin |
 | `NUM_LAST` | 数字标注模式，即拼音声调以数字形式在各个拼音之后，用数字 1-5 进行表示。| pin1 yin1 |
 | `FIRST_LETTER` | 首字母模式，只返回拼音的首字母部分。| p y |
+| `INPUT` | 键盘输入模式，使用 v 替代 ü。| nv hai |
 
 ## 测试案例
 
@@ -267,7 +268,7 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 
 # 后期 Road-Map
 
-- [ ] 键盘输入拼音形式支持
+- [x] 键盘输入拼音形式支持
 
 - [ ] 同音字列表返回
 
