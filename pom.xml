@@ -6,7 +6,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6-SNAPSHOT</version>
 
     <properties>
         <!--============================== All PLUGINS START ==============================-->
