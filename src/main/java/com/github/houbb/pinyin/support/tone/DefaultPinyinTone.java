@@ -119,6 +119,13 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                 // 自定义词库
                 List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
                 lines.addAll(defineLines);
+
+                // 本地词库
+                try {
+                    List<String> localLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_LOCAL, CharsetConst.UTF8, true);
+                    lines.addAll(localLines);
+                }catch (Exception ignored){ }
+
                 charMap = Guavas.newHashMap(lines.size());
 
                 for(String line : lines) {
@@ -162,6 +169,13 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                 // 处理自定义字典
                 List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_DEFINE);
                 lines.addAll(defineLines);
+
+                try {
+                    // 处理本地词典
+                    List<String> localLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_LOCAL, CharsetConst.UTF8, true);
+                    lines.addAll(localLines);
+                }catch (Exception ignored){ }
+
                 phraseMap = Guavas.newHashMap(lines.size());
 
                 for(String line : lines) {

@@ -39,5 +39,14 @@ public final class PinyinConst {
      */
     public static final String PINYIN_DICT_TONE_SYSTEM = "/pinyin_dict_tone.txt";
 
+    /**
+     * 拼音音调标注词典
+     */
+    public static String PINYIN_DICT_PHRASE_LOCAL = "";
+
+    /**
+     * 拼音音调标注字典
+     */
+    public static String PINYIN_DICT_CHAR_LOCAL = "";
 
 }
