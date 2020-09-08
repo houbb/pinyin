@@ -152,7 +152,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         return charMap;
     }
 
-    public void reloadCharMap(){
+    public static void reloadCharMap(){
         final long startTime = System.currentTimeMillis();
         final IPinyinChinese pinyinChinese = PinyinChineses.simple();
 
@@ -187,7 +187,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         System.out.println("[Pinyin] char dict loaded, cost time " + (endTime-startTime)+" ms!");
     }
 
-    public void reloadPhraseMap(){
+    public static void reloadPhraseMap(){
         final long startTime = System.currentTimeMillis();
         final IPinyinChinese pinyinChinese = PinyinChineses.simple();
 
