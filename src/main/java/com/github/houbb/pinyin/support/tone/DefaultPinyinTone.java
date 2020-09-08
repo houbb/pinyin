@@ -123,7 +123,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
                 // 本地词库
                 try {
-                    List<String> localLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_LOCAL, CharsetConst.UTF8, true);
+                    List<String> localLines = FileUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_LOCAL, CharsetConst.UTF8, true);
                     lines.addAll(localLines);
                 }catch (Exception ignored){ }
 
@@ -173,7 +173,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
                 try {
                     // 处理本地词典
-                    List<String> localLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_LOCAL, CharsetConst.UTF8, true);
+                    List<String> localLines = FileUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_LOCAL, CharsetConst.UTF8, true);
                     lines.addAll(localLines);
                 }catch (Exception ignored){ }
 
