@@ -130,7 +130,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
                     // 转换为简体，再一次存储
                     String simple = pinyinChinese.toSimple(word);
-                    if(!word.equals(simple)) {
+                    if(!word.equals(simple) && charMap.get(word) == null) {
                         charMap.put(simple, pinyinList);
                     }
                 }
@@ -171,7 +171,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
                     // 转换为简体，再一次存储
                     String simple = pinyinChinese.toSimple(word);
-                    if(!word.equals(simple)) {
+                    if(!word.equals(simple) && phraseMap.get(simple) == null) {
                         phraseMap.put(simple, strings[1]);
                     }
                 }
