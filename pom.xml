@@ -32,7 +32,7 @@
         <nlp-common.version>0.0.2</nlp-common.version>
 
         <!--other-->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
