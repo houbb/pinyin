@@ -121,6 +121,10 @@ public final class PinyinBs {
      * @since 0.0.1
      */
     public String toPinyin(String string) {
+        if(StringUtil.isEmpty(string)) {
+            return string;
+        }
+
         return pinyin.toPinyin(string, buildPinyinContext());
     }
 
