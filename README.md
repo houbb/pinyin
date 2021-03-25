@@ -39,9 +39,11 @@
 
 - 支持获取声母韵母信息
 
-### v0.1.6 主要变更
+### v0.2.0 主要变更
 
-- 依赖版本优化
+- 性能优化
+
+- 引导类添加分词自定义方法
 
 # 快速开始
 
@@ -55,7 +57,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.6</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -244,21 +246,24 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 
 均提前做好预热处理，可供参考。
 
+对比 pinyin4j 版本为 v2.5.1
+
 ## 单个分词
 
 | 对比函数 | 对比次数 | 对比内容 | 耗时 |
 |:---|:---|:---|:---|
-| `Pinyin4j toHanyuPinyinStringArray()` | 100w 次 | 相同文本随机选择一个字符 | 621 ms |
-| `pinyin toPinyin()` | 100w 次 | 相同文本随机选择一个字符 | 317 ms |
+| `Pinyin4j toHanyuPinyinStringArray()` | 100w 次 | 相同文本随机选择一个字符 | 650 ms |
+| `pinyin toPinyin()` | 100w 次 | 相同文本随机选择一个字符 | 410 ms |
 
 ## 字符串分词
 
 | 对比函数 | 对比次数 | 对比内容 | 耗时 |
 |:---|:---|:---|:---|
-| `Pinyin4j toHanyuPinyinString()` | 1w 次 | 相同长文本 | 33002 ms |
-| `pinyin toPinyin()` | 1w 次 | 相同长文本 | 17975 ms |
+| `Pinyin4j toHanyuPinyinString()` | 1w 次 | 相同长文本 | 26324 ms |
+| `pinyin toPinyin()` | 1w 次 | 相同长文本 | 16260 ms |
+| `pinyin toPinyin()` | 1w 次 | 相同长文本, chars 分词模式 | 14804 ms |
 
-而且 Pinyin4j 的汉语字符串转换是不支持分词的，本项目在支持分词的情况下速度基本依然是 pinyin4j 的两倍。
+pinyin4j 的汉语字符串转换是不支持分词的，本项目在支持分词的情况下速度基本是 pinyin4j 的两倍。
 
 # 技术鸣谢
 
@@ -270,6 +275,8 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 
 - [x] 键盘输入拼音形式支持
 
+- [x] 引导类开放分词的自定义配置
+
 - [ ] 同音字列表返回
 
 - [ ] 谐音字判断
@@ -279,5 +286,3 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 - [ ] 拼音转汉字
 
 - [ ] 性能优化
-
-- [ ] 开放分词的自定义配置

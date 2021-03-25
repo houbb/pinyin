@@ -20,13 +20,21 @@ public final class PinyinHelper {
     private PinyinHelper(){}
 
     /**
+     * 默认的实现类
+     *
+     * 避免最基本的方法调用，多次创建对象的问题
+     * @since 0.2.0
+     */
+    private static final PinyinBs PINYIN_BS_DEFAULT = PinyinBs.newInstance();
+
+    /**
      * 转换为拼音
      * @param string 原始信息
      * @return 结果
      * @since 0.0.1
      */
     public static String toPinyin(final String string) {
-        return toPinyin(string, PinyinStyleEnum.DEFAULT);
+        return PINYIN_BS_DEFAULT.toPinyin(string);
     }
 
     /**
@@ -72,7 +80,7 @@ public final class PinyinHelper {
      * @since 0.1.1
      */
     public static List<String> toPinyinList(final char chinese) {
-        return PinyinBs.newInstance().toPinyinList(chinese);
+        return PINYIN_BS_DEFAULT.toPinyinList(chinese);
     }
 
     /**
@@ -95,7 +103,7 @@ public final class PinyinHelper {
      * @since 0.0.8
      */
     public static boolean hasSamePinyin(final char chineseOne, final char chineseTwo) {
-        return PinyinBs.newInstance().hasSamePinyin(chineseOne, chineseTwo);
+        return PINYIN_BS_DEFAULT.hasSamePinyin(chineseOne, chineseTwo);
     }
 
     /**
@@ -106,7 +114,7 @@ public final class PinyinHelper {
      * @since 0.1.1
      */
     public static List<Integer> toneNumList(final String chinese) {
-        return PinyinBs.newInstance().toneNumList(chinese);
+        return PINYIN_BS_DEFAULT.toneNumList(chinese);
     }
 
     /**
@@ -117,15 +125,19 @@ public final class PinyinHelper {
      * @since 0.1.1
      */
     public static List<Integer> toneNumList(final char chinese) {
-        return PinyinBs.newInstance().toneNumList(chinese);
+        return PINYIN_BS_DEFAULT.toneNumList(chinese);
     }
 
     /**
      * 转换为声母列表
+     *
+     * 暂时不是很想暴露这个方法，后期可能会删除
      * @param chinese 中文
      * @return 结果
      * @since 0.1.1
+     * @deprecated 0.2.0 之后开始废弃
      */
+    @Deprecated
     public static List<String> shengMuList(final String chinese) {
         final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(PinyinStyleEnum.NORMAL);
         return PinyinBs.newInstance().style(pinyinTone).shengMuList(chinese);
@@ -133,10 +145,14 @@ public final class PinyinHelper {
 
     /**
      * 转换为韵母列表
+     *
+     * 暂时不是很想暴露这个方法，后期可能会删除
      * @param chinese 中文
      * @return 结果
      * @since 0.1.1
+     * @deprecated 0.2.0 之后开始废弃
      */
+    @Deprecated
     public static List<String> yunMuList(final String chinese) {
         final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(PinyinStyleEnum.NORMAL);
         return PinyinBs.newInstance().style(pinyinTone).yunMuList(chinese);

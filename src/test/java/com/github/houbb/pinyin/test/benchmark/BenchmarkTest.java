@@ -1,6 +1,8 @@
 package com.github.houbb.pinyin.test.benchmark;
 
 import com.github.houbb.heaven.util.io.StreamUtil;
+import com.github.houbb.pinyin.bs.PinyinBs;
+import com.github.houbb.pinyin.support.segment.PinyinSegments;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -36,27 +38,30 @@ public class BenchmarkTest {
     private static final int SINGLE_TIMES = 1000000;
 
     /**
-     * pinyin4j: Pinyin4j cost: 33002 ms
+     * pinyin4j: Pinyin4j cost: 26324
      *
-     * Pinyin4j 没有中文分词
+     * Pinyin4j 有中文分词，不过拼音的格式效果不是很好。
+     *
+     * 重庆火锅：chong qing huoguo
+     * @since 0.2.0
      */
     @Test
-    public void pinyin4jNoSegmentTest() throws BadHanyuPinyinOutputFormatCombination {
+    public void pinyin4jTest() throws BadHanyuPinyinOutputFormatCombination {
         // 创建汉语拼音处理类
         HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
         // 输出设置，大小写，音标方式
         defaultFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
         // 看的出来，没有支持分词。
-        // zhong qing huo guo
-        String result = PinyinHelper.toHanyuPinyinString("重庆火锅", defaultFormat, " ");
+        // chong qing huoguo
+        String result = PinyinHelper.toHanYuPinyinString("重庆火锅", defaultFormat, " ", false);
         System.out.println(result);
 
         // 验证
         final String text = getText();
         long startTime = System.currentTimeMillis();
         for(int i = 0; i < TIMES; i++) {
-            PinyinHelper.toHanyuPinyinString(text, defaultFormat, " ");
+            PinyinHelper.toHanYuPinyinString(text, defaultFormat, " ", false);
         }
         long endTime = System.currentTimeMillis();
         System.out.println("Pinyin4j cost: " + (endTime-startTime));
@@ -64,8 +69,9 @@ public class BenchmarkTest {
 
     /**
      * 预热耗时：565 ms
-     * 1w 次 cost: 17975 ms
+     * Pinyin cost: 16260
      *
+     * 重庆火锅：chóng qìng huǒ guō
      * 本框架，支持分词的测试。
      */
     @Test
@@ -86,17 +92,47 @@ public class BenchmarkTest {
     }
 
     /**
+     * chóng qìng huǒ guō
+     * Pinyin cost: 14804
+     *
+     * 重庆火锅：chóng qìng huǒ guō
+     *
+     * 使用指定的 chars 分词测试
+     *
+     * @since 0.2.0
+     */
+    @Test
+    public void pinyinWithCharSegmentTest() {
+        // 预热
+        String result = com.github.houbb.pinyin.util.PinyinHelper.toPinyin("重庆火锅");
+        System.out.println(result);
+
+        // 验证
+        final String text = getText();
+        long startTime = System.currentTimeMillis();
+        PinyinBs pinyinBs = PinyinBs.newInstance().segment(PinyinSegments.chars());
+        for(int i = 0; i < TIMES; i++) {
+            pinyinBs.toPinyin(text);
+        }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Pinyin cost: " + (endTime-startTime));
+    }
+
+    /**
      * 获取文本内容
      * @return 内容
      * @since 0.0.1
      */
     private String getText() {
-        return StreamUtil.getFileContent("永远的夏娃.txt");
+        return StreamUtil.getFileContent("back/永远的夏娃.txt");
     }
 
     /**
      * 单个字符耗时统计
-     * 621ms
+     * [zhong4, chong2]
+     *
+     * Pinyin4j cost: 650
      */
     @Test
     public void pinyin4jCharTest() {
@@ -119,8 +155,9 @@ public class BenchmarkTest {
     }
 
     /**
-     * 单个字符耗时统计
-     * 317 ms
+     * [zhòng, chóng, tóng]
+     *
+     * Pinyin cost: 410
      */
     @Test
     public void pinyinCharTest() {

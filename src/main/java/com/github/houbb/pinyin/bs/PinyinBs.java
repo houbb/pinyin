@@ -11,6 +11,7 @@ import com.github.houbb.pinyin.spi.*;
 import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.support.data.PinyinData;
 import com.github.houbb.pinyin.support.segment.DefaultPinyinSegment;
+import com.github.houbb.pinyin.support.segment.PinyinSegments;
 import com.github.houbb.pinyin.support.style.PinyinToneStyles;
 import com.github.houbb.pinyin.support.tone.DefaultPinyinTone;
 
@@ -29,25 +30,25 @@ public final class PinyinBs {
      * 默认分词
      * @since 0.0.1
      */
-    private IPinyinSegment pinyinSegment = Instances.singleton(DefaultPinyinSegment.class);
+    private IPinyinSegment pinyinSegment = PinyinSegments.defaults();
 
     /**
      * 中文服务类
      * @since 0.0.1
      */
-    private IPinyinChinese pinyinChinese = PinyinChineses.simple();
+    private final IPinyinChinese pinyinChinese = PinyinChineses.simple();
 
     /**
      * 注音映射
      * @since 0.0.1
      */
-    private IPinyinTone pinyinTone = Instances.singleton(DefaultPinyinTone.class);
+    private final IPinyinTone pinyinTone = Instances.singleton(DefaultPinyinTone.class);
 
     /**
      * 拼音数据实现
      * @since 0.1.1
      */
-    private IPinyinData data = Instances.singleton(PinyinData.class);
+    private final IPinyinData data = Instances.singleton(PinyinData.class);
 
     /**
      * 拼音的形式
@@ -59,7 +60,7 @@ public final class PinyinBs {
      * 默认核心实现
      * @since 0.1.1
      */
-    private IPinyin pinyin = Instances.singleton(Pinyin.class);
+    private final IPinyin pinyin = Instances.singleton(Pinyin.class);
 
     /**
      * 连接符号
@@ -97,6 +98,19 @@ public final class PinyinBs {
      */
     public PinyinBs connector(String connector) {
         this.connector = connector;
+        return this;
+    }
+
+    /**
+     * 添加自定义分词
+     * @param pinyinSegment 拼音分词实现
+     * @return 分词
+     * @since 0.2.0
+     */
+    public PinyinBs segment(IPinyinSegment pinyinSegment) {
+        ArgUtil.notNull(pinyinSegment, "segment");
+
+        this.pinyinSegment = pinyinSegment;
         return this;
     }
 

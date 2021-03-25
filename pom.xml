@@ -6,7 +6,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.6</version>
+    <version>0.2.0</version>
 
     <properties>
         <!--============================== All PLUGINS START ==============================-->
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
-            <version>2.5.0</version>
+            <version>2.5.1</version>
             <optional>true</optional>
             <scope>test</scope>
         </dependency>
