@@ -39,9 +39,9 @@
 
 - 支持获取声母韵母信息
 
-### v0.1.4 主要变更
+### v0.1.6 主要变更
 
-- 支持输入法的拼音模式
+- 依赖版本优化
 
 # 快速开始
 
@@ -55,7 +55,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.6</version>
 </dependency>
 ```
 
@@ -277,3 +277,7 @@ Assert.assertEquals("wǒ ài chóng qìng huǒ guō", pinyin);
 - [ ] 谐音字列表返回
 
 - [ ] 拼音转汉字
+
+- [ ] 性能优化
+
+- [ ] 开放分词的自定义配置
