@@ -39,11 +39,9 @@
 
 - 支持获取声母韵母信息
 
-### v0.2.0 主要变更
+### v0.2.1 主要变更
 
-- 性能优化
-
-- 引导类添加分词自定义方法
+- 添加部分地名
 
 # 快速开始
 
@@ -57,7 +55,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
 </dependency>
 ```
 

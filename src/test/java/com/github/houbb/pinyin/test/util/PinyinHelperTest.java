@@ -96,4 +96,17 @@ public class PinyinHelperTest {
         Assert.assertEquals("xiaomi shǒu jī", PinyinHelper.toPinyin(text2));
     }
 
+    /**
+     * 地名
+     * @since 0.2.1
+     */
+    @Test
+    public void locationTest() {
+        Assert.assertEquals("hé jiāng", PinyinHelper.toPinyin("合江"));
+        Assert.assertEquals("bèng shān", PinyinHelper.toPinyin("蚌山"));
+        Assert.assertEquals("hóng tóng", PinyinHelper.toPinyin("洪洞"));
+        Assert.assertEquals("shàn xiàn", PinyinHelper.toPinyin("单县"));
+        Assert.assertEquals("lào tíng", PinyinHelper.toPinyin("乐亭"));
+    }
+
 }
