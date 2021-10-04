@@ -24,9 +24,9 @@ public class PinyinHelperToneNumTest {
         final char ch3 = '孙';
         final char ch4 = '李';
 
-        Assert.assertEquals("[4, 4]", PinyinHelper.toneNumList(ch).toString());
+        Assert.assertEquals("[4]", PinyinHelper.toneNumList(ch).toString());
         Assert.assertEquals("[2]", PinyinHelper.toneNumList(ch2).toString());
-        Assert.assertEquals("[1, 4]", PinyinHelper.toneNumList(ch3).toString());
+        Assert.assertEquals("[1]", PinyinHelper.toneNumList(ch3).toString());
         Assert.assertEquals("[3]", PinyinHelper.toneNumList(ch4).toString());
     }
 
@@ -43,10 +43,10 @@ public class PinyinHelperToneNumTest {
 
     @Test
     public void initTest() {
-        String simple = PinyinChineses.simple().toSimple("赵");
-        System.out.println(simple);
-
-        System.out.println(PinyinHelper.toPinyinList('赵'));
+//        String simple = PinyinChineses.simple().toSimple("赵");
+//        System.out.println(simple);
+//
+//        System.out.println(PinyinHelper.toPinyinList('赵'));
     }
 
     @Test

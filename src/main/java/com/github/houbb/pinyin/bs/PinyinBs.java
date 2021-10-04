@@ -10,10 +10,9 @@ import com.github.houbb.pinyin.api.impl.PinyinContext;
 import com.github.houbb.pinyin.spi.*;
 import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.support.data.PinyinData;
-import com.github.houbb.pinyin.support.segment.DefaultPinyinSegment;
 import com.github.houbb.pinyin.support.segment.PinyinSegments;
 import com.github.houbb.pinyin.support.style.PinyinToneStyles;
-import com.github.houbb.pinyin.support.tone.DefaultPinyinTone;
+import com.github.houbb.pinyin.support.tone.PinyinTones;
 
 import java.util.List;
 
@@ -36,13 +35,13 @@ public final class PinyinBs {
      * 中文服务类
      * @since 0.0.1
      */
-    private final IPinyinChinese pinyinChinese = PinyinChineses.simple();
+    private final IPinyinChinese pinyinChinese = PinyinChineses.defaults();
 
     /**
      * 注音映射
      * @since 0.0.1
      */
-    private final IPinyinTone pinyinTone = Instances.singleton(DefaultPinyinTone.class);
+    private final IPinyinTone pinyinTone = PinyinTones.defaults();
 
     /**
      * 拼音数据实现

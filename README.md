@@ -39,15 +39,17 @@
 
 - 支持获取声母韵母信息
 
-### v0.2.1 主要变更
+### v0.2.2 主要变更
 
-- 添加部分地名
+- 简化繁简体转换
+
+- 修复 `叁` 的拼音错误
 
 # 快速开始
 
 ## 准备
 
-jdk 1.7+
+jdk 1.8+
 
 ## maven 引入
 
@@ -55,7 +57,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
 </dependency>
 ```
 

@@ -23,4 +23,13 @@ public final class PinyinChineses {
         return Instances.singleton(SimplePinyinChinese.class);
     }
 
+    /**
+     * 默认实现
+     * @return 简单实现
+     * @since 0.2.2
+     */
+    public static IPinyinChinese defaults() {
+        return Instances.singleton(DefaultsPinyinChinese.class);
+    }
+
 }

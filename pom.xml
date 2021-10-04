@@ -28,7 +28,7 @@
 
         <!--============================== JAR START ==============================-->
         <!--inter-->
-        <heaven.version>0.1.129</heaven.version>
+        <heaven.version>0.1.144</heaven.version>
         <nlp-common.version>0.0.3</nlp-common.version>
 
         <!--other-->

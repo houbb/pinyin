@@ -12,9 +12,7 @@ import com.github.houbb.pinyin.constant.PinyinConst;
 import com.github.houbb.pinyin.constant.enums.PinyinToneNumEnum;
 import com.github.houbb.pinyin.model.CharToneInfo;
 import com.github.houbb.pinyin.model.ToneItem;
-import com.github.houbb.pinyin.spi.IPinyinChinese;
 import com.github.houbb.pinyin.spi.IPinyinToneStyle;
-import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.util.ToneHelper;
 
 import java.util.List;
@@ -113,8 +111,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(charMap)) {
                 final long startTime = System.currentTimeMillis();
-                final IPinyinChinese pinyinChinese = PinyinChineses.simple();
-
                 List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
                 // 自定义词库
                 List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
@@ -127,12 +123,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
                     final String word = strings[0];
                     charMap.put(word, pinyinList);
-
-                    // 转换为简体，再一次存储
-                    String simple = pinyinChinese.toSimple(word);
-                    if(!word.equals(simple)) {
-                        charMap.put(simple, pinyinList);
-                    }
                 }
 
                 final long endTime = System.currentTimeMillis();
@@ -156,8 +146,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(phraseMap)) {
                 final long startTime = System.currentTimeMillis();
-                final IPinyinChinese pinyinChinese = PinyinChineses.simple();
-
                 List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
                 // 处理自定义字典
                 List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_DEFINE);
@@ -168,12 +156,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                     String[] strings = line.split(PunctuationConst.COLON);
                     String word = strings[0];
                     phraseMap.put(word, strings[1]);
-
-                    // 转换为简体，再一次存储
-                    String simple = pinyinChinese.toSimple(word);
-                    if(!word.equals(simple)) {
-                        phraseMap.put(simple, strings[1]);
-                    }
                 }
 
                 final long endTime = System.currentTimeMillis();
