@@ -13,7 +13,7 @@ import com.github.houbb.pinyin.constant.enums.PinyinToneNumEnum;
 import com.github.houbb.pinyin.model.CharToneInfo;
 import com.github.houbb.pinyin.model.ToneItem;
 import com.github.houbb.pinyin.spi.IPinyinToneStyle;
-import com.github.houbb.pinyin.util.ToneHelper;
+import com.github.houbb.pinyin.util.InnerToneHelper;
 
 import java.util.List;
 import java.util.Map;
@@ -110,7 +110,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
 
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(charMap)) {
-                final long startTime = System.currentTimeMillis();
                 List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_SYSTEM);
                 // 自定义词库
                 List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_CHAR_DEFINE);
@@ -124,9 +123,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                     final String word = strings[0];
                     charMap.put(word, pinyinList);
                 }
-
-                final long endTime = System.currentTimeMillis();
-                System.out.println("[Pinyin] char dict loaded, cost time " + (endTime-startTime)+" ms!");
             }
         }
 
@@ -206,7 +202,7 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         int length = tone.length();
         for(int i = 0; i < length; i++) {
             char currentChar = tone.charAt(i);
-            ToneItem toneItem = ToneHelper.getToneItem(currentChar);
+            ToneItem toneItem = InnerToneHelper.getToneItem(currentChar);
 
             if (ObjectUtil.isNotNull(toneItem)) {
                 charToneInfo.setToneItem(toneItem);

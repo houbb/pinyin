@@ -35,21 +35,17 @@
 
 - 支持判断是否为同音字
 
-- 支持单独获取声调信息
+- 支持同音字
 
-- 支持获取声母韵母信息
+### v0.3.0 主要变更
 
-### v0.2.2 主要变更
-
-- 简化繁简体转换
-
-- 修复 `叁` 的拼音错误
+- 支持同音字
 
 # 快速开始
 
 ## 准备
 
-jdk 1.8+
+jdk 1.7+
 
 ## maven 引入
 
@@ -57,13 +53,26 @@ jdk 1.8+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.2.2</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
 ## 快速开始
 
 参考 [PinyinHelperTest](https://github.com/houbb/pinyin/blob/master/src/test/java/com/github/houbb/pinyin/test/util/PinyinHelperTest.java)
+
+### 方法概览
+
+| 方法 | 返回值 | 说明 |
+|:----|:----|:----|
+| toPinyin(String) | String | 文本转换为拼音 |
+| toPinyin(String, PinyinStyleEnum) | String | 文本转换为拼音，可指定拼音样式 |
+| toPinyin(String, PinyinStyleEnum, String) | String | 文本转换为拼音，可指定拼音样式，可指定连接符号 |
+| toPinyinList(char) | List<String> | 返回汉字所有拼音列表 |
+| toPinyinList(char, PinyinStyleEnum) | List<String> | 返回汉字所有拼音列表，指定拼音样式 |
+| hasSamePinyin(char, char) | boolean | 判断两个汉字是否有相同的读音 |
+| samePinyinMap(char) | Map<String, List<String>> | 返回汉字的同音字MAP，key 为拼音 NUM_LAST 模式 |
+| samePinyinList(String) | List<String> | 返回拼音 NUM_LAST 模式对应的同音字 |
 
 ### 返回中文的拼音
 
@@ -189,6 +198,40 @@ String pinyin = PinyinHelper.toPinyin("奮斗");
 Assert.assertEquals("fèn dòu", pinyin);
 ```
 
+# 同音字
+
+## 同音字 map
+
+返回一个汉字，所有拼音对应的同音字列表。
+
+```java
+final char hanzi2 = '重';
+Map<String,List<String>> map2 = PinyinHelper.samePinyinMap(hanzi2);
+```
+
+对应的同音字结果为：
+
+```
+{tong2=[㠉, 㠽, 㣚, 㣠, 㤏, 㮔, 㸗, 㼧, 㼿, 䂈, 䆚, 䮵, 䳋, 䴀, 䶱, 仝, 佟, 侗, 偅, 僮, 勭, 同, 哃, 垌, 峂, 峒, 峝, 庝, 彤, 晍, 曈, 朣, 桐, 橦, 氃, 洞, 浵, 湩, 潼, 烔, 燑, 爞, 犝, 狪, 獞, 痌, 眮, 瞳, 砼, 硐, 硧, 秱, 穜, 童, 筒, 筩, 粡, 絧, 膧, 艟, 茼, 蚒, 蜼, 蟲, 衕, 詷, 赨, 酮, 重, 鉖, 鉵, 銅, 铜, 餇, 鮦, 鲖, 鼕, 𠖄, 𡦜, 𢈉, 𢏕, 𢓘, 𣑸, 𣪯, 𤱇, 𤺄, 𥩌, 𥫂, 𦏆, 𦒍, 𦨴, 𧇌, 𧊚, 𧋒, 𧋚, 𧌝, 𧳆, 𨚯, 𨜳, 𨝯, 𨠌, 𩍅, 𩩅, 𩻡, 𪀭, 𫍣], zhong4=[㐺, 㲴, 㼿, 䱰, 中, 乑, 仲, 众, 偅, 堹, 妕, 媑, 狆, 眾, 祌, 种, 種, 穜, 筗, 緟, 茽, 蚛, 蟲, 衆, 衶, 衷, 褈, 諥, 踵, 重, 𠱧, 𡥿, 𢝆, 𣱧, 𤚏, 𥻝, 𦌋, 𦔉, 𧬤, 𧳮, 𨉢, 𩾋, 𩿀], chong2=[㓽, 㹐, 䌬, 䖝, 䳯, 崇, 崈, 漴, 烛, 爞, 痋, 种, 種, 緟, 茧, 虫, 蝩, 蟲, 褈, 酮, 重, 隀, 𡿂, 𢖄, 𢝈, 𣐯, 𧝎, 𨛱, 𩅃, 𩌨, 𩜖, 𩞉, 𩞋]}
+```
+
+每一个读音作为 key，对应的同音字作为 list。
+
+当然，有时候我们希望获取指定拼音的同音字列表。
+
+## 同音字 List
+
+```java
+final String pinyinNumLast = "zhong4";
+List<String> pinyinList = PinyinHelper.samePinyinList(pinyinNumLast);
+```
+
+对应结果：
+
+```
+[㐺, 㲴, 㼿, 䱰, 中, 乑, 仲, 众, 偅, 堹, 妕, 媑, 狆, 眾, 祌, 种, 種, 穜, 筗, 緟, 茽, 蚛, 蟲, 衆, 衶, 衷, 褈, 諥, 踵, 重, 𠱧, 𡥿, 𢝆, 𣱧, 𤚏, 𥻝, 𦌋, 𦔉, 𧬤, 𧳮, 𨉢, 𩾋, 𩿀]
+```
+
 # 自定义拼音词库
 
 已有的词库很难满足各种各样的场景，本工具提供自定义拼音词库的功能。
@@ -277,14 +320,10 @@ pinyin4j 的汉语字符串转换是不支持分词的，本项目在支持分�
 
 - [x] 引导类开放分词的自定义配置
 
-- [ ] 同音字列表返回
+- [x] 同音字列表返回
 
-- [ ] 谐音字判断
+- [ ] 同韵字列表返回
 
-- [ ] 谐音字列表返回
+- [ ] 音近字
 
 - [ ] 拼音转汉字
-
-- [ ] 词组拼音系统词典瘦身
-
-如果 chars 也是同样的拼音效果，则移除对应的词组拼音。降低内存，并且提升加载速度。

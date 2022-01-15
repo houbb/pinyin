@@ -6,7 +6,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.2.2</version>
+    <version>0.3.0</version>
 
     <properties>
         <!--============================== All PLUGINS START ==============================-->
@@ -28,7 +28,7 @@
 
         <!--============================== JAR START ==============================-->
         <!--inter-->
-        <heaven.version>0.1.144</heaven.version>
+        <heaven.version>0.1.154</heaven.version>
         <nlp-common.version>0.0.3</nlp-common.version>
 
         <!--other-->

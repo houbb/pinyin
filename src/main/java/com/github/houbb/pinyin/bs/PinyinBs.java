@@ -7,11 +7,13 @@ import com.github.houbb.pinyin.api.IPinyin;
 import com.github.houbb.pinyin.api.IPinyinContext;
 import com.github.houbb.pinyin.api.impl.Pinyin;
 import com.github.houbb.pinyin.api.impl.PinyinContext;
+import com.github.houbb.pinyin.exception.PinyinException;
 import com.github.houbb.pinyin.spi.*;
 import com.github.houbb.pinyin.support.chinese.PinyinChineses;
 import com.github.houbb.pinyin.support.data.PinyinData;
 import com.github.houbb.pinyin.support.segment.PinyinSegments;
 import com.github.houbb.pinyin.support.style.PinyinToneStyles;
+import com.github.houbb.pinyin.support.tone.PinyinToneReverse;
 import com.github.houbb.pinyin.support.tone.PinyinTones;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public final class PinyinBs {
      * 中文服务类
      * @since 0.0.1
      */
-    private final IPinyinChinese pinyinChinese = PinyinChineses.defaults();
+    private final IPinyinChinese  pinyinChinese = PinyinChineses.defaults();
 
     /**
      * 注音映射
@@ -66,6 +68,18 @@ public final class PinyinBs {
      * @since 0.1.2
      */
     private String connector = StringUtil.BLANK;
+
+    /**
+     * 拼音的反向标注
+     * @since 0.3.0
+     */
+    private IPinyinToneReverse pinyinToneReverse = new PinyinToneReverse();
+
+    /**
+     * 拼音上下文
+     * @since 0.3.0
+     */
+    private IPinyinContext pinyinContext;
 
     /**
      * 新建引导类实例
@@ -114,6 +128,38 @@ public final class PinyinBs {
     }
 
     /**
+     * 拼音反向标注
+     * @param pinyinToneReverse 反向拼音标注
+     * @return 结果
+     * @since 0.3.0
+     */
+    public PinyinBs pinyinToneReverse(IPinyinToneReverse pinyinToneReverse) {
+        ArgUtil.notNull(pinyinToneReverse, "pinyinToneReverse");
+
+        this.pinyinToneReverse = pinyinToneReverse;
+        return this;
+    }
+
+    public PinyinBs init() {
+        this.pinyinContext = PinyinContext.newInstance()
+                .chinese(pinyinChinese)
+                .data(data)
+                .segment(pinyinSegment)
+                .style(style)
+                .tone(pinyinTone)
+                .connector(connector)
+                .pinyinToneReverse(pinyinToneReverse);
+
+        return this;
+    }
+
+    private synchronized void statusCheck() {
+        if(pinyinContext == null) {
+            this.init();
+        }
+    }
+
+    /**
      * 转换为拼音字符串
      * @param string 字符串
      * @return 结果
@@ -124,7 +170,8 @@ public final class PinyinBs {
             return string;
         }
 
-        return pinyin.toPinyin(string, buildPinyinContext());
+        statusCheck();
+        return pinyin.toPinyin(string, pinyinContext);
     }
 
     /**
@@ -134,7 +181,8 @@ public final class PinyinBs {
      * @since 0.0.1
      */
     public List<String> toPinyinList(char chinese) {
-        return pinyin.toPinyinList(chinese, buildPinyinContext());
+        statusCheck();
+        return pinyin.toPinyinList(chinese, pinyinContext);
     }
 
     /**
@@ -145,62 +193,20 @@ public final class PinyinBs {
      * @since 0.0.1
      */
     public boolean hasSamePinyin(char chineseOne, char chineseTwo) {
-        return pinyin.hasSamePinyin(chineseOne, chineseTwo, buildPinyinContext());
+        statusCheck();
+        return pinyin.hasSamePinyin(chineseOne, chineseTwo, pinyinContext);
     }
 
     /**
-     * 声调编号列表
-     * @param chinese 中文
+     * 相同的拼音列表
+     * @param pinyin 拼音
+     * @param sameTone 相同的声调
      * @return 结果
-     * @since 0.1.0
+     * @since 0.3.0
      */
-    public List<Integer> toneNumList(String chinese) {
-        return pinyin.toneNumList(chinese, buildPinyinContext());
-    }
-
-    /**
-     * 声调编号列表
-     * @param chinese 中文
-     * @return 结果
-     * @since 0.1.0
-     */
-    public List<Integer> toneNumList(char chinese) {
-        return pinyin.toneNumList(chinese, buildPinyinContext());
-    }
-
-    /**
-     * 声母列表
-     * @param chinese 中文
-     * @return 结果
-     * @since 0.1.0
-     */
-    public List<String> shengMuList(final String chinese) {
-        return pinyin.shengMuList(chinese, buildPinyinContext());
-    }
-
-    /**
-     * 韵母列表
-     * @param chinese 中文
-     * @return 结果
-     * @since 0.1.0
-     */
-    public List<String> yunMuList(final String chinese) {
-        return pinyin.yunMuList(chinese, buildPinyinContext());
-    }
-
-    /**
-     * 构建上下文
-     * @return 结果
-     * @since 0.1.1
-     */
-    private IPinyinContext buildPinyinContext() {
-        return PinyinContext.newInstance()
-                .chinese(pinyinChinese)
-                .data(data)
-                .segment(pinyinSegment)
-                .style(style)
-                .tone(pinyinTone)
-                .connector(connector);
+    public List<String> samePinyinList(String pinyin, final boolean sameTone) {
+        statusCheck();
+        return this.pinyin.samePinyinList(pinyin, sameTone, pinyinContext);
     }
 
 }

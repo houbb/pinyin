@@ -51,4 +51,11 @@ public interface IPinyinContext {
      */
     String connector();
 
+    /**
+     * 拼音反向
+     *
+     * @return 实现
+     * @since 0.3.0
+     */
+    IPinyinToneReverse pinyinToneReverse();
 }
