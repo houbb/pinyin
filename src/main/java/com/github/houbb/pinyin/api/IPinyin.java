@@ -86,6 +86,7 @@ public interface IPinyin {
      * 相同的拼音列表
      * @param pinyin 拼音
      * @param sameToneNum 相同的声调
+     * @param context 上下文
      * @return 结果
      * @since 0.3.0
      */
