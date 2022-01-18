@@ -23,12 +23,25 @@ public class DefaultsPinyinChinese implements IPinyinChinese {
         // 这个后续进行处理，暂时不做细致处理。
         // 应该是包含中文，就处理。
         // 如果没有全部匹配，那么就降级为单个字的拼音处理。
-        return CharsetUtil.isAllChinese(original);
+
+        // 只要包含一个中文字符，则认为是
+        if(StringUtil.isEmpty(original)) {
+            return false;
+        }
+
+        char[] chars = original.toCharArray();
+        for(char c : chars) {
+            if(isChinese(c)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
     public boolean isChinese(char original) {
-        return CharUtil.isChinese(original);
+        return CharUtil.isNotAscii(original);
     }
 
     @Override

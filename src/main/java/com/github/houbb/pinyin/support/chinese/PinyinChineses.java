@@ -15,15 +15,6 @@ public final class PinyinChineses {
     private PinyinChineses(){}
 
     /**
-     * 简单实现
-     * @return 简单实现
-     * @since 0.0.7
-     */
-    public static IPinyinChinese simple() {
-        return Instances.singleton(SimplePinyinChinese.class);
-    }
-
-    /**
      * 默认实现
      * @return 简单实现
      * @since 0.2.2
