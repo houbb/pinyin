@@ -48,6 +48,7 @@ public interface IPinyin {
      * @return 结果
      * @since 0.1.0
      */
+    @Deprecated
     List<Integer> toneNumList(final String chinese, final IPinyinContext context);
 
     /**
@@ -58,6 +59,7 @@ public interface IPinyin {
      * @return 结果
      * @since 0.1.0
      */
+    @Deprecated
     List<Integer> toneNumList(final char chinese, final IPinyinContext context);
 
     /**
@@ -67,6 +69,7 @@ public interface IPinyin {
      * @return 结果
      * @since 0.1.1
      */
+    @Deprecated
     List<String> shengMuList(final String chinese, final IPinyinContext context);
 
     /**
@@ -76,6 +79,18 @@ public interface IPinyin {
      * @return 结果
      * @since 0.1.1
      */
+    @Deprecated
     List<String> yunMuList(final String chinese, final IPinyinContext context);
+
+    /**
+     * 相同的拼音列表
+     * @param pinyin 拼音
+     * @param sameToneNum 相同的声调
+     * @param context 上下文
+     * @return 结果
+     * @since 0.3.0
+     */
+    List<String> samePinyinList(String pinyin, final boolean sameToneNum, final IPinyinContext context);
+
 
 }

@@ -1,8 +1,10 @@
 package com.github.houbb.pinyin.util;
 
 import com.github.houbb.heaven.util.io.StreamUtil;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.pinyin.constant.PinyinConst;
+import com.github.houbb.pinyin.model.CharToneInfo;
 import com.github.houbb.pinyin.model.ToneItem;
 
 import java.util.HashMap;
@@ -17,9 +19,9 @@ import java.util.Map;
  * @author Administrator
  * @since 0.0.3
  */
-public final class ToneHelper {
+public final class InnerToneHelper {
 
-    private ToneHelper(){}
+    private InnerToneHelper(){}
 
     /**
      * 存放对应的拼音声调信息
@@ -47,6 +49,31 @@ public final class ToneHelper {
      */
     public static ToneItem getToneItem(final char c) {
         return TONE_ITEM_MAP.get(c);
+    }
+
+    /**
+     * 获取对应的声调信息
+     * @param tone 拼音信息
+     * @return 声调信息
+     * @since 0.0.3
+     */
+    public static CharToneInfo getCharToneInfo(final String tone) {
+        CharToneInfo charToneInfo = new CharToneInfo();
+        charToneInfo.setIndex(-1);
+
+        int length = tone.length();
+        for(int i = 0; i < length; i++) {
+            char currentChar = tone.charAt(i);
+            ToneItem toneItem = InnerToneHelper.getToneItem(currentChar);
+
+            if (ObjectUtil.isNotNull(toneItem)) {
+                charToneInfo.setToneItem(toneItem);
+                charToneInfo.setIndex(i);
+                break;
+            }
+        }
+
+        return charToneInfo;
     }
 
 }

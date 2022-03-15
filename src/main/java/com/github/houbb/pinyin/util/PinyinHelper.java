@@ -2,12 +2,16 @@ package com.github.houbb.pinyin.util;
 
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.pinyin.bs.PinyinBs;
 import com.github.houbb.pinyin.constant.enums.PinyinStyleEnum;
 import com.github.houbb.pinyin.spi.IPinyinToneStyle;
 import com.github.houbb.pinyin.support.style.PinyinToneStyles;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 简化用于调用
@@ -20,13 +24,21 @@ public final class PinyinHelper {
     private PinyinHelper(){}
 
     /**
+     * 默认的实现类
+     *
+     * 避免最基本的方法调用，多次创建对象的问题
+     * @since 0.2.0
+     */
+    private static final PinyinBs PINYIN_BS_DEFAULT = PinyinBs.newInstance().init();
+
+    /**
      * 转换为拼音
      * @param string 原始信息
      * @return 结果
      * @since 0.0.1
      */
     public static String toPinyin(final String string) {
-        return toPinyin(string, PinyinStyleEnum.DEFAULT);
+        return PINYIN_BS_DEFAULT.toPinyin(string);
     }
 
     /**
@@ -62,6 +74,7 @@ public final class PinyinHelper {
         return PinyinBs.newInstance()
                 .style(style)
                 .connector(connector)
+                .init()
                 .toPinyin(string);
     }
 
@@ -72,7 +85,7 @@ public final class PinyinHelper {
      * @since 0.1.1
      */
     public static List<String> toPinyinList(final char chinese) {
-        return PinyinBs.newInstance().toPinyinList(chinese);
+        return PINYIN_BS_DEFAULT.toPinyinList(chinese);
     }
 
     /**
@@ -84,7 +97,10 @@ public final class PinyinHelper {
      */
     public static List<String> toPinyinList(final char chinese, final PinyinStyleEnum styleEnum) {
         final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(styleEnum);
-        return PinyinBs.newInstance().style(pinyinTone).toPinyinList(chinese);
+        return PinyinBs.newInstance()
+                .style(pinyinTone)
+                .init()
+                .toPinyinList(chinese);
     }
 
     /**
@@ -95,51 +111,48 @@ public final class PinyinHelper {
      * @since 0.0.8
      */
     public static boolean hasSamePinyin(final char chineseOne, final char chineseTwo) {
-        return PinyinBs.newInstance().hasSamePinyin(chineseOne, chineseTwo);
+        return PINYIN_BS_DEFAULT.hasSamePinyin(chineseOne, chineseTwo);
     }
 
     /**
-     * 获取拼音的声调
+     * 同音字 map
      *
-     * @param chinese 中文字符串
-     * @return 音调列表
-     * @since 0.1.1
-     */
-    public static List<Integer> toneNumList(final String chinese) {
-        return PinyinBs.newInstance().toneNumList(chinese);
-    }
-
-    /**
-     * 获取拼音的声调
+     * 因为汉字存在多音字，所以这里返回的是一个 map
+     * key: 汉字的拼音
+     * value: 对应的同音字列表
      *
-     * @param chinese 中文字符
-     * @return 音调列表
-     * @since 0.1.1
+     * @param hanzi 汉字
+     * @return 字符列表
+     * @since 0.3.0
      */
-    public static List<Integer> toneNumList(final char chinese) {
-        return PinyinBs.newInstance().toneNumList(chinese);
+    public static Map<String, List<String>> samePinyinMap(final char hanzi) {
+        //1. 获取汉字的多音字列表
+        List<String> pinyinList = toPinyinList(hanzi, PinyinStyleEnum.NUM_LAST);
+        if(CollectionUtil.isEmpty(pinyinList)) {
+            return Collections.emptyMap();
+        }
+
+        //2. 获取每一个汉字对应的同音字列表
+        Map<String, List<String>> map = new HashMap<>(pinyinList.size());
+        for(String pinyin : pinyinList) {
+            List<String> characterList = samePinyinList(pinyin);
+
+            map.put(pinyin, characterList);
+        }
+
+        return map;
     }
 
     /**
-     * 转换为声母列表
-     * @param chinese 中文
+     * 获取拼音对应的同音字列表
+     * @param pinyinNumLast 拼音
      * @return 结果
-     * @since 0.1.1
+     * @since 0.3.0
      */
-    public static List<String> shengMuList(final String chinese) {
-        final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(PinyinStyleEnum.NORMAL);
-        return PinyinBs.newInstance().style(pinyinTone).shengMuList(chinese);
-    }
+    public static List<String> samePinyinList(String pinyinNumLast) {
+        final boolean sameTone = true;
 
-    /**
-     * 转换为韵母列表
-     * @param chinese 中文
-     * @return 结果
-     * @since 0.1.1
-     */
-    public static List<String> yunMuList(final String chinese) {
-        final IPinyinToneStyle pinyinTone = PinyinToneStyles.getTone(PinyinStyleEnum.NORMAL);
-        return PinyinBs.newInstance().style(pinyinTone).yunMuList(chinese);
+        return PINYIN_BS_DEFAULT.samePinyinList(pinyinNumLast, sameTone);
     }
 
 }

@@ -9,6 +9,7 @@ import com.github.houbb.pinyin.api.IPinyin;
 import com.github.houbb.pinyin.api.IPinyinContext;
 import com.github.houbb.pinyin.spi.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -106,6 +107,29 @@ public class Pinyin implements IPinyin {
                 return pinyinData.yunMu(s);
             }
         });
+    }
+
+    @Override
+    public List<String> samePinyinList(String pinyin, boolean sameToneNum, IPinyinContext context) {
+        IPinyinToneReverse pinyinToneReverse = context.pinyinToneReverse();
+
+        // 是否相同的拼音
+        if(sameToneNum) {
+            return pinyinToneReverse.getHanziList(pinyin);
+        }
+
+        // 构建所有的拼音
+        List<String> resultList = new ArrayList<>();
+        String pinyinRaw = pinyin.substring(0, pinyin.length()-1);
+        for(int i = 1; i <= 5; i++) {
+            String pinyinLast = pinyinRaw+ i;
+            List<String> characterList = pinyinToneReverse.getHanziList(pinyinLast);
+            if(CollectionUtil.isNotEmpty(characterList)) {
+                resultList.addAll(characterList);
+            }
+        }
+
+        return resultList;
     }
 
     /**

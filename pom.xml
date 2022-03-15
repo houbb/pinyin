@@ -6,7 +6,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.1.4</version>
+    <version>0.3.1</version>
 
     <properties>
         <!--============================== All PLUGINS START ==============================-->
@@ -28,11 +28,11 @@
 
         <!--============================== JAR START ==============================-->
         <!--inter-->
-        <heaven.version>0.1.113</heaven.version>
-        <nlp-common.version>0.0.2</nlp-common.version>
+        <heaven.version>0.1.154</heaven.version>
+        <nlp-common.version>0.0.3</nlp-common.version>
 
         <!--other-->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
-            <version>2.5.0</version>
+            <version>2.5.1</version>
             <optional>true</optional>
             <scope>test</scope>
         </dependency>

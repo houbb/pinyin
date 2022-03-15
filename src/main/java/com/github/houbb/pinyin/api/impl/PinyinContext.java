@@ -47,6 +47,12 @@ public class PinyinContext implements IPinyinContext {
     private String connector;
 
     /**
+     * 拼音反向
+     * @since 0.3.0
+     */
+    private IPinyinToneReverse pinyinToneReverse;
+
+    /**
      * 返回实例
      * @since 0.1.1
      * @return 结果
@@ -112,6 +118,16 @@ public class PinyinContext implements IPinyinContext {
 
     public PinyinContext connector(String connector) {
         this.connector = connector;
+        return this;
+    }
+
+    @Override
+    public IPinyinToneReverse pinyinToneReverse() {
+        return pinyinToneReverse;
+    }
+
+    public PinyinContext pinyinToneReverse(IPinyinToneReverse pinyinToneReverse) {
+        this.pinyinToneReverse = pinyinToneReverse;
         return this;
     }
 }

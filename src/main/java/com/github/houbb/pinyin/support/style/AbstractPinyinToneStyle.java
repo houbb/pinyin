@@ -6,7 +6,7 @@ import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.pinyin.model.CharToneInfo;
 import com.github.houbb.pinyin.model.ToneItem;
 import com.github.houbb.pinyin.spi.IPinyinToneStyle;
-import com.github.houbb.pinyin.util.ToneHelper;
+import com.github.houbb.pinyin.util.InnerToneHelper;
 
 /**
  * <p> project: pinyin-IPinyinStyle </p>
@@ -34,34 +34,11 @@ public abstract class AbstractPinyinToneStyle implements IPinyinToneStyle {
         }
 
         // 进行格式化
-        CharToneInfo toneInfo = getCharToneInfo(charTone);
+        CharToneInfo toneInfo = InnerToneHelper.getCharToneInfo(charTone);
         return getCharFormat(charTone, toneInfo);
     }
 
-    /**
-     * 获取对应的声调信息
-     * @param tone 拼音信息
-     * @return 声调信息
-     * @since 0.0.3
-     */
-    private CharToneInfo getCharToneInfo(final String tone) {
-        CharToneInfo charToneInfo = new CharToneInfo();
-        charToneInfo.setIndex(-1);
 
-        int length = tone.length();
-        for(int i = 0; i < length; i++) {
-            char currentChar = tone.charAt(i);
-            ToneItem toneItem = ToneHelper.getToneItem(currentChar);
-
-            if (ObjectUtil.isNotNull(toneItem)) {
-                charToneInfo.setToneItem(toneItem);
-                charToneInfo.setIndex(i);
-                break;
-            }
-        }
-
-        return charToneInfo;
-    }
 
     /**
      * 对信息进行连接

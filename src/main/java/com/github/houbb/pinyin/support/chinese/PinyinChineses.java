@@ -15,12 +15,12 @@ public final class PinyinChineses {
     private PinyinChineses(){}
 
     /**
-     * 简单实现
+     * 默认实现
      * @return 简单实现
-     * @since 0.0.7
+     * @since 0.2.2
      */
-    public static IPinyinChinese simple() {
-        return Instances.singleton(SimplePinyinChinese.class);
+    public static IPinyinChinese defaults() {
+        return Instances.singleton(DefaultsPinyinChinese.class);
     }
 
 }
