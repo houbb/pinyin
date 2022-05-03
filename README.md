@@ -314,6 +314,22 @@ pinyin4j 的汉语字符串转换是不支持分词的，本项目在支持分�
 
 [segment](https://github.com/houbb/segment) 提供的中文分词。
 
+# NLP 开源矩阵
+
+[pinyin 汉字转拼音](https://github.com/houbb/pinyin)
+
+[pinyin2hanzi 拼音转汉字](https://github.com/houbb/pinyin2hanzi)
+
+[segment 高性能中文分词](https://github.com/houbb/segment)
+
+[opencc4j 中文繁简体转换](https://github.com/houbb/opencc4j)
+
+[nlp-hanzi-similar 汉字相似度](https://github.com/houbb/nlp-hanzi-similar)
+
+[word-checker 拼写检测](https://github.com/houbb/word-checker)
+
+[sensitive-word 敏感词](https://github.com/houbb/sensitive-word)
+    
 # 后期 Road-Map
 
 - [x] 键盘输入拼音形式支持
