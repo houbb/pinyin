@@ -7,7 +7,7 @@
 [![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/pinyin/blob/master/LICENSE.txt)
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/houbb/nlp-common)
 
-> [变更日志](https://github.com/houbb/pinyin/blob/master/CHANGELOG.md)
+> [在线体验](https://houbb.github.io/opensource/pinyin)
 
 ## 创作目的
 
