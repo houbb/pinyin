@@ -141,7 +141,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
         }
         synchronized (DefaultPinyinTone.class) {
             if(ObjectUtil.isNull(phraseMap)) {
-                final long startTime = System.currentTimeMillis();
                 List<String> lines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_SYSTEM);
                 // 处理自定义字典
                 List<String> defineLines = StreamUtil.readAllLines(PinyinConst.PINYIN_DICT_PHRASE_DEFINE);
@@ -153,9 +152,6 @@ public class DefaultPinyinTone extends AbstractPinyinTone {
                     String word = strings[0];
                     phraseMap.put(word, strings[1]);
                 }
-
-                final long endTime = System.currentTimeMillis();
-                System.out.println("[Pinyin] phrase dict loaded, cost time " + (endTime-startTime)+" ms!");
             }
         }
 

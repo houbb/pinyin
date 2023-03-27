@@ -37,9 +37,9 @@
 
 - 支持同音字
 
-### v0.3.1 主要变更
+### v0.4.0 主要变更
 
-- 修正默认策略中对于中文的判定范围
+- 更新依赖版本，移除控台日志
 
 # 快速开始
 
@@ -53,7 +53,7 @@ jdk 1.7+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>pinyin</artifactId>
-    <version>0.3.1</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
